@@ -7,7 +7,7 @@ export default async function Home() {
       <h3 className="text-2xl">Welcome!</h3>
       <p>
         Dive into trivia, challenge your friends, and uncover weird facts along
-        the way.
+        the way!
       </p>
       <p>Think you know it all? Prove it.</p>
       <NavBar />
