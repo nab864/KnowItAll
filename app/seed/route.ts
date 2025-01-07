@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 async function seedAdmin() {
   await prisma.user.deleteMany({});
-  const admin = await prisma.user.create({
+  await prisma.user.create({
     data: {
       username: "Admin",
       email: "kaifuller1995@gmail.com",
@@ -108,9 +108,9 @@ async function seedQuizzes() {
 
 export async function GET() {
   try {
-    // await seedAdmin();
-    // await seedQuestions();
-    // await seedQuizzes();
+    await seedAdmin();
+    await seedQuestions();
+    await seedQuizzes();
     return Response.json({ message: "database seeded successfully" });
   } catch (error) {
     return Response.json({ error }, { status: 500 });
