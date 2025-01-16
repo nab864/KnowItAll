@@ -3,12 +3,14 @@ import PlayButton from "@/app/ui/browse/playButton";
 
 export default async function BrowseTable({
   currentPage,
-  query
+  query,
+  tags
 }: {
   currentPage: number;
   query: string;
+  tags: string[]
 }) {
-  const quizzes = await fetchFilteredQuizzes(currentPage, query);
+  const quizzes = await fetchFilteredQuizzes(currentPage, query, tags);
   return (
     <>
       <table className="border rounded-xl min-w-30">

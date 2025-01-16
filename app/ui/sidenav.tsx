@@ -1,3 +1,4 @@
+import { signOut } from "@/auth";
 import Link from "next/link";
 
 export default function SideNav() {
@@ -10,6 +11,12 @@ export default function SideNav() {
       <Link href="/create">
         <h1>Create</h1>
       </Link>
+      <form action={async () => {
+        "use server";
+        await signOut();
+      }}>
+        <button>Sign Out</button>
+      </form>
     </div>
   );
 }

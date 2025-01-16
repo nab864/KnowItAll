@@ -9,10 +9,15 @@ export default async function Page(props: {
   searchParams?: Promise<{
     page?: string;
     query?: string;
+    tags?: string | string[]
   }>;
 }) {
   const searchParams = await props.searchParams;
   const query = searchParams?.query || ""
+  let tags = searchParams?.tags || []
+  if (typeof tags === "string"){
+    tags = [tags]
+  }
   const currentPage = Number(searchParams?.page) || 1;
   const totalPages = await fetchQuizPages(query);
   return (
@@ -20,7 +25,7 @@ export default async function Page(props: {
       <h1>Browse Page</h1>
       <Search placeholder="Seach quizzes..." />
       <Suspense fallback={<BrowseTableSkeleton />}>
-        <BrowseTable currentPage={currentPage} query={query}/>
+        <BrowseTable currentPage={currentPage} query={query} tags={tags}/>
       </Suspense>
       <Pagination totalPages={totalPages} />
     </div>
