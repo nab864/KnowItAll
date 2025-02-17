@@ -1,22 +1,15 @@
 import { signOut } from "@/auth";
-import Link from "next/link";
+import Button from "@/app/ui/navigation/button";
 
 export default function SideNav() {
   return (
-    <div className="flex h-full flex-col justify-center items-center">
-      <Link href="/browse">
-        <h1>Browse</h1>
-      </Link>
-
-      <Link href="/create">
-        <h1>Create</h1>
-      </Link>
-      <form action={async () => {
-        "use server";
-        await signOut();
-      }}>
-        <button>Sign Out</button>
-      </form>
+    <div className="flex flex-col my-2 ml-2 bg-white rounded-lg p-1">
+      <h1 className="text-4xl">KnowItAll</h1>
+      <div className="bg-purple-600 w-full h-0.5"></div>
+      <div className="mt-2">
+        <Button urlRef="/browse" text="Browse"></Button>
+        <Button urlRef="/create" text="Create"></Button>
+      </div>
     </div>
   );
 }

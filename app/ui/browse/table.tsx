@@ -13,7 +13,7 @@ export default async function BrowseTable({
   const quizzes = await fetchFilteredQuizzes(currentPage, query, tags);
   return (
     <>
-      <table className="border rounded-xl min-w-30">
+      <table className="rounded-xl min-w-30 bg-white">
         <thead className="text-left">
           <tr>
             <th scope="col" className="px-4 py-5">
@@ -28,7 +28,7 @@ export default async function BrowseTable({
           {quizzes?.map((quiz) => (
             <tr
               key={quiz.id}
-              className="w-full border-b-2 border-gray-300 py-3 hover:bg-gray-100 last-of-type:border-none"
+              className="w-full border-b-2  py-3 hover:bg-purple-300 last-of-type:border-none"
             >
               <td className="whitespace-nowrap py-3 pl-6 pr-3">
                 {quiz.category}

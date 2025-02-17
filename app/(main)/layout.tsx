@@ -7,13 +7,13 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div>
-      <TopNav /> 
-      <div className="flex h-screen ">
-        <div className="flex-none">
+    <div className="relative">
+      <div className="absolute right-0">
+        <TopNav />
+      </div>
+      <div className="h-screen bg-gray-300 flex">
           <SideNav />
-        </div>
-        <div className="grow">{children}</div>
+          <div className="grow">{children}</div>
       </div>
     </div>
   );
