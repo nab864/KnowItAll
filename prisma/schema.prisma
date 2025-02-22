@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -17,15 +11,16 @@ model User {
   id         String     @id @default(uuid())
   first_name String?
   last_name  String?
-  username   String     @unique
+  username   String?    @unique
   email      String     @unique
-  password   String
+  password   String?
   is_admin   Boolean    @default(false)
   created_at DateTime   @default(now())
   updated_at DateTime   @default(now())
+  isExternal Boolean    @default(false)
   questions  Question[]
-  reviews    Review[]
   quizzes    Quiz[]
+  reviews    Review[]
 }
 
 model Question {
@@ -37,40 +32,40 @@ model Question {
   correctAnswer    String
   incorrectAnswers String[]
   type             String
-  q_junctions      Q_junction[]
-  user             User         @relation(fields: [created_by], references: [id])
   created_by       String
   created_at       DateTime     @default(now())
   updated_at       DateTime     @default(now())
+  q_junctions      Q_junction[]
+  user             User         @relation(fields: [created_by], references: [id])
 }
 
 model Quiz {
   id          String       @id @default(uuid())
-  user        User         @relation(fields: [created_by], references: [id])
   category    String       @default("")
   created_by  String
   created_at  DateTime     @default(now())
   updated_at  DateTime     @default(now())
   q_junctions Q_junction[]
+  user        User         @relation(fields: [created_by], references: [id])
   reviews     Review[]
 }
 
 model Q_junction {
-  quiz        Quiz     @relation(fields: [quiz_id], references: [id], onDelete: Cascade)
   quiz_id     String
-  question    Question @relation(fields: [question_id], references: [id])
   question_id String
+  question    Question @relation(fields: [question_id], references: [id])
+  quiz        Quiz     @relation(fields: [quiz_id], references: [id], onDelete: Cascade)
 
   @@id([quiz_id, question_id])
 }
 
 model Review {
   id         String   @id @default(uuid())
-  quiz       Quiz     @relation(fields: [quiz_id], references: [id])
   quiz_id    String
   rating     Boolean
-  user       User     @relation(fields: [created_by], references: [id])
   created_by String
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
+  user       User     @relation(fields: [created_by], references: [id])
+  quiz       Quiz     @relation(fields: [quiz_id], references: [id])
 }

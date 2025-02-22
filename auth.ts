@@ -1,48 +1,41 @@
+import { Prisma } from "@prisma/client";
+import { prisma } from "./prisma";
+import { authConfig } from "@/auth.config";
 import NextAuth from "next-auth";
-import { authConfig } from "./auth.config";
+import GitHub from "next-auth/providers/github";
 import Credentials from "next-auth/providers/credentials";
-import { z } from "zod";
-import { PrismaClient, User } from "@prisma/client";
-import bcrypt from "bcrypt"
+import bcryptjs from "bcryptjs"
+import { z } from "zod"
 
-const prisma = new PrismaClient()
 
-async function getUser(username: string): Promise<User | undefined> {
-  try {
-    const user = await prisma.user.findMany({
-      where:{
-        username: username
-      }
-    })
-    return user[0]
-  } catch (error) {
-    console.error("Failed to fetch user:", error);
-    throw new Error("Failed to fetch user.")
-  }
-}
-
-export const { handlers, auth, signIn, signOut } = NextAuth({
+export const { handlers, signIn, signOut, auth } = NextAuth({
   ...authConfig,
-  providers: [
-    Credentials({
-      async authorize(credentials) {
-        const parsedCredentials = z
-          .object({
-            username: z.string().min(3),
-            password: z.string().min(6),
-          })
-          .safeParse(credentials);
+  providers: [GitHub, Credentials({
+    credentials: {
+      username: {},
+      password: {},
+    },
+    async authorize(credentials) {
+        const parsedCredentials = z.object({
+          username: z.string().min(3),
+          password: z.string().min(8)
+        }).safeParse(credentials)
         if (parsedCredentials.success) {
-          const { username, password } = parsedCredentials.data;
-          const user = await getUser(username);
-          if (!user) return null;
-          const passwordsMatch = await bcrypt.compare(password, user.password)
-
-          if (passwordsMatch) return user;
+          const {username, password} = parsedCredentials.data
+          const user = await prisma.user.findUnique({
+            where:{
+              username: username,
+            }
+          })
+          if (!user) {
+            throw new Error("Invalid credentials.")
+          }
+          const userPassword = user.password as string
+          const passwordMatch = await bcryptjs.compare(password, userPassword)
+          if (passwordMatch) return user
         }
-
         return null
-      },
-    }),
-  ],
+      
+    }
+  })]
 });

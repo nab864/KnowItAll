@@ -1,21 +1,33 @@
-import type { NextAuthConfig } from "next-auth";
+import { Prisma } from "@prisma/client";
+import { prisma } from "@/prisma";
+import { getUserByEmail } from "./app/lib/data";
+import { NextAuthConfig } from "next-auth";
+
+
 
 export const authConfig = {
-  pages: {
-    signIn: "/login",
-  },
   callbacks: {
-    authorized({ auth, request: { nextUrl } }) {
-      const isLoggedIn = !!auth?.user;
-      const isOnProfile = nextUrl.pathname.startsWith("/profile");
-      if (isOnProfile) {
-        if (isLoggedIn) return true;
-        return false; // Redirect unauthenticated users to login page
-      } else if (isLoggedIn) {
-        // return Response.redirect(new URL("/", nextUrl));
+    async signIn({ user }) {
+      const existingUser = await getUserByEmail(user.email ?? "")
+      const email = user.email as string
+      if (!existingUser) {
+        try {
+          await prisma.user.create({
+            data: {
+              email: email,
+              isExternal:true
+            }
+          })
+        } catch (e) {
+          if (e instanceof Prisma.PrismaClientKnownRequestError) {
+            console.error(e.message)
+            return false
+          }
+          throw e
+        }
       }
-      return true;
+      return true
     },
   },
-  providers: [], // Add providers with an empty array for now
+  providers: []
 } satisfies NextAuthConfig;

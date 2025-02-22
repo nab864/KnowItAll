@@ -5,6 +5,23 @@ const prisma = new PrismaClient();
 
 const ITEMS_PER_PAGE = 10;
 
+export async function getUserByEmail(email: string) {
+  return prisma.user.findUnique({
+    where: {
+      email: email
+    }
+  })
+}
+
+export async function createUser() {
+  await prisma.user.create({
+    data: {
+      email: "kaifuller1885@gmail.com",
+      isExternal:true
+    }
+  })
+}
+
 export async function fetchAllQuestions() {
   try {
     const questions = await prisma.question.findMany({});
