@@ -3,6 +3,7 @@ import { signOut } from "@/auth";
 export default function SignOut() {
   return (
     <form
+      className="block px-4 py-2 text-sm hover:bg-purple-600 rounded-md"
       action={async () => {
         "use server";
         await signOut();

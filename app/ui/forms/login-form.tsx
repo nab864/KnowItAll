@@ -3,15 +3,16 @@ import {
   ArrowRightIcon,
   ExclamationCircleIcon,
 } from "@heroicons/react/24/outline";
-import { Button } from "./buttons";
+import { Button } from "@/app/ui/buttons";
 import { useActionState } from "react";
-import { authenticate } from "../lib/actions";
+import { authenticate } from "@/app/lib/actions";
 
 export default function LoginForm() {
   const [errorMessage, formAction, isPending] = useActionState(
     authenticate,
     undefined
   );
+
   return (
     <form action={formAction} className="space-y-3">
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
