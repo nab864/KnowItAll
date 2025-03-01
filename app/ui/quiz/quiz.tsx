@@ -21,7 +21,7 @@ export default function Quiz({ id, quiz }: { id: string; quiz: QuizDef }) {
   }
   return (
     <form
-      className="bg-white flex flex-col items-center justify-center w-3/5"
+      className="flex flex-col items-center justify-center w-3/5"
       key={id}
       onSubmit={(e) => handleSubmit(e)}
     >

@@ -11,6 +11,9 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        main: "var(--main)",
+        select: "var(--select)",
+        component: "var(--component)",
       },
     },
   },

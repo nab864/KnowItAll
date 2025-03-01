@@ -9,7 +9,7 @@ export default function Button({
 }) {
   return (
     <div className="flex flex-col my-0.5">
-      <Link href={urlRef} className=" text-center rounded-lg hover:bg-purple-600">{text}</Link>
+      <Link href={urlRef} className=" text-center rounded-lg hover:bg-select">{text}</Link>
     </div>
   );
 }

@@ -15,7 +15,7 @@ export default function LoginForm() {
 
   return (
     <form action={formAction} className="">
-      <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
+      <div className="flex-1 rounded-lg bg-component px-6 pb-4 pt-8">
         <h1 className="mb-3 text-2xl">Please Login</h1>
         <div className="w-full">
           <div>
@@ -23,7 +23,7 @@ export default function LoginForm() {
               Username
             </label>
             <input
-              className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-2 placeholder:text-gray-500"
+              className="peer block w-full rounded-md border border-black py-[9px] pl-2 placeholder:text-component"
               id="username"
               type="text"
               name="username"
@@ -36,7 +36,7 @@ export default function LoginForm() {
               Password
             </label>
             <input
-              className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-2 placeholder:text-gray-500"
+              className="peer block w-full rounded-md border border-component py-[9px] pl-2 placeholder:text-component"
               id="password"
               type="password"
               name="password"
@@ -47,10 +47,10 @@ export default function LoginForm() {
         </div>
       </div>
       <Button
-        className="mt-4 w-full flex h-10 items-center rounded-lg bg-gray-500 px-4 text-sm font-medium text-white transition-colors hover:bg-gray-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-500 active:bg-gray-600 aria-disabled:cursor-not-allowed aria-disabled:opacity-50"
+        className="mt-4 w-full flex h-10 items-center rounded-lg bg-component px-4 text-sm font-medium text-foreground transition-colors hover:bg-gray-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-500 active:bg-gray-600 aria-disabled:cursor-not-allowed aria-disabled:opacity-50"
         aria-disabled={isPending}
       >
-        Log in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
+        Log in <ArrowRightIcon className="ml-auto h-5 w-5 text-foreground" />
       </Button>
       <div
         className="flex h-8 items-end space-x-1"

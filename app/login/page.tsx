@@ -26,7 +26,7 @@ export default function Login(props: {
               }
             }}
           >
-            <Button type="submit" className="w-full p-2 flex justify-center rounded-lg border border-black hover:bg-gray-300 transition-colors">
+            <Button type="submit" className="w-full p-2 bg-component flex justify-center rounded-lg border border-foreground hover:bg-gray-400 transition-colors">
               <Image
                 src={`/${provider.id}.svg`}
                 width={25}

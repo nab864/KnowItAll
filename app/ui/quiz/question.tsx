@@ -1,4 +1,5 @@
 import { QuestionProps } from "@/app/lib/definitions";
+import clsx from "clsx";
 import { useEffect, useState } from "react";
 
 export const Question: React.FC<QuestionProps> = ({
@@ -16,31 +17,35 @@ export const Question: React.FC<QuestionProps> = ({
   }, [question.correctAnswer]);
   return (
     <>
-    {answers[1] ? (
-      <div className="bg-gray-300" key={question.id}>
-        <h1>{question.question}</h1>
-        {answers.map((answer) => {
-          return (
-            <div>
-              <input
-                type="radio"
-                key={answer}
-                value={answer}
-                checked={answer === selectedAnswer}
-                onChange={() =>
-                  setSelectedAnswers((prevAnswer) => ({
-                    ...prevAnswer,
-                    [question.id]: answer,
-                  }))
-                }
-              />
-              <span>{answer}</span>
-            </div>
-          );
-        })}
-      </div>
-
-    ) : null}
+      {answers[1] ? (
+        <div
+          className="bg-component w-[75%] rounded-lg text-center my-2"
+          key={question.id}
+        >
+          <h1 className="select-none">{question.question}</h1>
+          {answers.map((answer) => {
+            return (
+              <div className={clsx({"bg-main": answer === selectedAnswer, "hover:bg-select": answer !== selectedAnswer})}>
+                <input
+                  type="radio"
+                  id={answer}
+                  key={answer}
+                  value={answer}
+                  checked={answer === selectedAnswer}
+                  onChange={() =>
+                    setSelectedAnswers((prevAnswer) => ({
+                      ...prevAnswer,
+                      [question.id]: answer,
+                    }))
+                  }
+                  className="hidden"
+                />
+                <label htmlFor={answer} className="select-none block">{answer}</label>
+              </div>
+            );
+          })}
+        </div>
+      ) : null}
     </>
   );
 };
