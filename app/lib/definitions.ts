@@ -15,4 +15,10 @@ export type QuestionProps = {
   question: Question;
   setSelectedAnswers: React.Dispatch<React.SetStateAction<QuizAnswers>>;
   selectedAnswer: string;
+  quizFinished: boolean;
+}
+
+export type SummaryProps = {
+  correctTotal: number;
+  questionCount: number;
 }
