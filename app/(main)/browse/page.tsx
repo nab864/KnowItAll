@@ -21,7 +21,7 @@ export default async function Page(props: {
   const currentPage = Number(searchParams?.page) || 1;
   const totalPages = await fetchQuizPages(query);
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center mt-2">
       <h1>Browse Page</h1>
       <Search placeholder="Seach quizzes..." />
       <Suspense fallback={<BrowseTableSkeleton />}>

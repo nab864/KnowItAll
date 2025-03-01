@@ -11,7 +11,7 @@ export default function MainLayout({
       <div className="absolute right-0">
         <TopNav />
       </div>
-      <div className="h-screen bg-gray-300 flex">
+      <div className="flex">
           <SideNav />
           <div className="grow">{children}</div>
       </div>

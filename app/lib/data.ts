@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { Quiz } from "./definitions";
+import { QuizDef } from "./definitions";
 
 const prisma = new PrismaClient();
 
@@ -8,18 +8,18 @@ const ITEMS_PER_PAGE = 10;
 export async function getUserByEmail(email: string) {
   return prisma.user.findUnique({
     where: {
-      email: email
-    }
-  })
+      email: email,
+    },
+  });
 }
 
 export async function createUser() {
   await prisma.user.create({
     data: {
       email: "kaifuller1885@gmail.com",
-      isExternal:true
-    }
-  })
+      isExternal: true,
+    },
+  });
 }
 
 export async function fetchAllQuestions() {
@@ -31,7 +31,6 @@ export async function fetchAllQuestions() {
     throw new Error("Failed to fetch question data.");
   }
 }
-
 
 export async function fetchFilteredQuizzes(
   currentPage: number,
@@ -51,7 +50,7 @@ export async function fetchFilteredQuizzes(
       skip: offset,
       take: ITEMS_PER_PAGE,
     });
-    const cleanedQuizzes: Quiz[] = [];
+    const cleanedQuizzes: QuizDef[] = [];
     for (let i = 0; i < quizzes.length; i++) {
       const rawQuiz = await prisma.q_junction.findMany({
         where: {
@@ -92,5 +91,28 @@ export async function fetchQuizPages(query: string) {
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Failed to fetch total number of invoices.");
+  }
+}
+
+export async function fetchQuiz(id: string) {
+  try {
+    const rawQuiz = await prisma.q_junction.findMany({
+      where: {
+        quiz_id: id,
+      },
+      include: {
+        question: true,
+        quiz: true,
+      },
+    });
+    const refinedQuiz: QuizDef = {
+      id: rawQuiz[0].quiz.id,
+      created_by: rawQuiz[0].quiz.created_by,
+      category: rawQuiz[0].quiz.category,
+      questions: rawQuiz.map(({ question }) => question),
+    };
+    return refinedQuiz;
+  } catch (error) {
+    throw new Error("Failed to fetch Quiz.");
   }
 }
