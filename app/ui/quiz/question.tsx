@@ -1,4 +1,5 @@
 import { QuestionProps } from "@/app/lib/definitions";
+import { shuffleQuestions } from "@/app/lib/utils";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 
@@ -14,7 +15,7 @@ export const Question: React.FC<QuestionProps> = ({
       ...question.incorrectAnswers,
       question.correctAnswer,
     ];
-    setAnswers(unshuffledAnswer.sort(() => Math.random() - 0.5));
+    setAnswers(shuffleQuestions(unshuffledAnswer));
   }, [question.correctAnswer]);
   return (
     <>
@@ -24,9 +25,9 @@ export const Question: React.FC<QuestionProps> = ({
           key={question.id}
         >
           <h1 className="select-none">{question.question}</h1>
-          {answers.map((answer) => {
+          {answers.map((answer, index) => {
             return (
-              <div
+              <div key={index}
                 className={clsx({
                   "bg-main": answer === selectedAnswer && !quizFinished,
                   "hover:bg-select": answer !== selectedAnswer && !quizFinished,

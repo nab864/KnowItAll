@@ -7,6 +7,11 @@ export type QuizDef = {
   questions: Question[]
 }
 
+export type TempQuiz = {
+  category?: string;
+  questions?: Question[]
+}
+
 export type QuizAnswers = {
   [questionId: string]: string;
 }

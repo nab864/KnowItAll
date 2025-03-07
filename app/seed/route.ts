@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import seedData from "@/app/lib/trivia-questions.json";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
 

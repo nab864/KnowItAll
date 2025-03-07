@@ -8,7 +8,7 @@ export default function Page() {
       <div className="flex w-full justify-center mt-20">
         <div className="flex flex-col justify-center text-center w-1/2 mr-1">
           <h2 className="text-2xl mb-2">Ready to test your wits?</h2>
-          <Link href="/create/quiz-maker">
+          <Link href="/create/generate">
             <div className="border border-black py-36 rounded-xl mb-2">Generate Quiz</div>
           </Link>
           <h4 className="text-xl">Whip up quizzes using our question pool.</h4>

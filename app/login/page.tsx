@@ -1,6 +1,4 @@
 import LoginForm from "../ui/forms/login-form";
-import { redirect } from "next/navigation";
-import { AuthError } from "next-auth";
 import { providerMap, signIn } from "@/auth";
 import Image from "next/image";
 import { Button } from "../ui/buttons";
