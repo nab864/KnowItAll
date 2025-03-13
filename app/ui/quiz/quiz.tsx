@@ -13,16 +13,19 @@ export default function Quiz({ id, quiz }: { id: string; quiz: QuizDef }) {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     window.scrollTo(0,0)
-    for (let i = 0; i < quiz.questions.length; i++) {
-      if (
-        quiz.questions[i].correctAnswer ===
-        selectedAnswers[quiz.questions[i].id]
-      ) {
-        setCorrectCount((prevCount) => prevCount + 1);
+    if (quiz.questions) {
+      for (let i = 0; i < quiz.questions.length; i++) {
+        if (
+          quiz.questions[i].correctAnswer ===
+          selectedAnswers[quiz.questions[i].id]
+        ) {
+          setCorrectCount((prevCount) => prevCount + 1);
+        }
       }
+      setQuizFinished(true);
+      window.scrollTo({top: 0, left: 0, behavior: "smooth"})
+    };
     }
-    setQuizFinished(true);
-  };
 
   const handleRestart = () => {
     setQuizFinished(false);
@@ -34,8 +37,8 @@ export default function Quiz({ id, quiz }: { id: string; quiz: QuizDef }) {
       onSubmit={(e) => handleSubmit(e)}
     >
       <h1>{quiz.category}</h1>
-      {quizFinished ? (<QuizSummary correctTotal={correctCount} questionCount={quiz.questions.length} />) : null}
-      {quiz.questions.map((question) => {
+      {quizFinished && quiz.questions ? (<QuizSummary correctTotal={correctCount} questionCount={quiz.questions.length} />) : null}
+      {quiz.questions?.map((question) => {
         return (
           <Question
             question={question}

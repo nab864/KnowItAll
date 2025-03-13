@@ -1,8 +1,8 @@
 import { Question } from "@prisma/client";
 
 export type QuizDef = {
-  id: string;
-  created_by: string;
+  id?: string;
+  created_by?: string;
   category: string;
   questions: Question[]
 }

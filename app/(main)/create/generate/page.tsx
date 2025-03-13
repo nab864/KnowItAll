@@ -1,31 +1,23 @@
-"use client"
-import { generateQuiz } from "@/app/lib/actions"
-import { useState } from "react"
+import GeneratePage from "@/app/ui/generate/generate-page";
+import { auth } from "@/auth";
 
 
-export default function Page() {
-  const [quiz, setQuiz] = useState({})
-  const handleOnClick = async () => {
-    setQuiz(await generateQuiz("History", 5))
-    console.log(quiz)
-  }
+export default async function Page(props: {
+  searchParams?: Promise<{
+    category?: string;
+    number: string;
+  }>
+}) {
+  const session = await auth()
+  const searchParams = await props.searchParams;
+
+  const category = searchParams?.category || ""
+  const number = searchParams?.number || ""
+  
   return (
     <div className="flex flex-col justify-center items-center h-full ml-44 mt-10">
       <h1>Generate Quiz</h1>
-      <form action="">
-        <select name="category" id="category" className="text-black">
-          <option value="General Knowledge">General Knowledge</option>
-          <option value="Geography">Geography</option>
-          <option value="Society & Culture">Society & Culture</option>
-          <option value="Music">Music</option>
-          <option value="Food & Drink">Food & Drink</option>
-          <option value="Sport & Leisure">Sport & Leisure</option>
-          <option value="Film & TV">Film & TV</option>
-          <option value="Science">Science</option>
-          <option value="Arts & Literature">Arts & Literature</option>
-          <option value="History">History</option>
-        </select>
-      </form>
+      <GeneratePage number={number} category={category} session={session} />
     </div>
-  )
+  );
 }
