@@ -58,7 +58,6 @@ export async function saveGeneratedQuiz(quiz: QuizDef, session: Session) {
         return {quiz_id: generatedQuiz.id, question_id:question.id}
       })
     })
-    console.log("Success")
   } catch (error) {
     console.log(error)
   }
