@@ -23,6 +23,12 @@ export type QuestionProps = {
   quizFinished: boolean;
 }
 
+export type SingleQuestionProps = {
+  question: Question;
+  setSelectedAnswer: React.Dispatch<React.SetStateAction<string>>;
+  selectedAnswer: string;
+}
+
 export type SummaryProps = {
   correctTotal: number;
   questionCount: number;

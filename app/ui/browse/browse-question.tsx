@@ -1,13 +1,13 @@
-import { QuestionProps } from "@/app/lib/definitions";
+"use client";
+import { SingleQuestionProps } from "@/app/lib/definitions";
 import { shuffleQuestions } from "@/app/lib/utils";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 
-export const QuestionProp: React.FC<QuestionProps> = ({
+export const SingleQuestion: React.FC<SingleQuestionProps> = ({
   question,
-  setSelectedAnswers,
+  setSelectedAnswer,
   selectedAnswer,
-  quizFinished,
 }) => {
   const [answers, setAnswers] = useState<string[]>([]);
   useEffect(() => {
@@ -16,7 +16,9 @@ export const QuestionProp: React.FC<QuestionProps> = ({
       question.correctAnswer,
     ];
     setAnswers(shuffleQuestions(unshuffledAnswer));
-  }, [question.correctAnswer]);
+    setSelectedAnswer("");
+  }, [question]);
+
   return (
     <>
       {answers[1] ? (
@@ -30,13 +32,12 @@ export const QuestionProp: React.FC<QuestionProps> = ({
               <div
                 key={index}
                 className={clsx({
-                  "bg-main": answer === selectedAnswer && !quizFinished,
-                  "hover:bg-select": answer !== selectedAnswer && !quizFinished,
+                  "hover:bg-select": answer !== selectedAnswer && !selectedAnswer,
                   "bg-green-800":
-                    answer === question.correctAnswer && quizFinished,
+                    selectedAnswer &&
+                    answer === question.correctAnswer,
                   "bg-red-700":
                     answer === selectedAnswer &&
-                    quizFinished &&
                     selectedAnswer !== question.correctAnswer,
                 })}
               >
@@ -46,13 +47,8 @@ export const QuestionProp: React.FC<QuestionProps> = ({
                   key={answer}
                   value={answer}
                   checked={answer === selectedAnswer}
-                  disabled={quizFinished}
-                  onChange={() =>
-                    setSelectedAnswers((prevAnswer) => ({
-                      ...prevAnswer,
-                      [question.id]: answer,
-                    }))
-                  }
+                  disabled={!!selectedAnswer}
+                  onChange={() => setSelectedAnswer(answer)}
                   className="hidden"
                 />
                 <label htmlFor={answer} className="select-none block">

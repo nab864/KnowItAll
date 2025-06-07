@@ -31,6 +31,20 @@ export async function fetchAllQuestions() {
     throw new Error("Failed to fetch question data.");
   }
 }
+export async function fetchRandomQuestion() {
+  try {
+    const questionCount = await prisma.question.count();
+    const randomIndex = Math.floor(Math.random() * questionCount);
+    const question = await prisma.question.findMany({
+      take: 1,
+      skip: randomIndex,
+    });
+    return question[0]
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch random question.");
+  }
+}
 
 export async function fetchFilteredQuizzes(
   currentPage: number,

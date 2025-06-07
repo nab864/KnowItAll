@@ -33,6 +33,6 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
   ];
 };
 
-export const shuffleQuestions = (array: string[] | Question[]) => {
-  return array.sort(() => Math.random() - 0.5);
+export function shuffleQuestions<T>(questions: T[]): T[] {
+  return questions.sort(() => Math.random() - 0.5);
 };

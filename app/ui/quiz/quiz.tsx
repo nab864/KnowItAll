@@ -1,7 +1,7 @@
 "use client";
 import { FormEvent, useState } from "react";
 import type { QuizAnswers, QuizDef } from "@/app/lib/definitions";
-import { Question } from "./question";
+import { QuestionProp } from "./question";
 import { Button } from "../buttons";
 import { QuizSummary } from "./quiz-summary";
 
@@ -12,7 +12,7 @@ export default function Quiz({ id, quiz }: { id: string; quiz: QuizDef }) {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    window.scrollTo(0,0)
+    window.scrollTo(0, 0);
     if (quiz.questions) {
       for (let i = 0; i < quiz.questions.length; i++) {
         if (
@@ -23,9 +23,9 @@ export default function Quiz({ id, quiz }: { id: string; quiz: QuizDef }) {
         }
       }
       setQuizFinished(true);
-      window.scrollTo({top: 0, left: 0, behavior: "smooth"})
-    };
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     }
+  };
 
   const handleRestart = () => {
     setQuizFinished(false);
@@ -37,10 +37,15 @@ export default function Quiz({ id, quiz }: { id: string; quiz: QuizDef }) {
       onSubmit={(e) => handleSubmit(e)}
     >
       <h1>{quiz.category}</h1>
-      {quizFinished && quiz.questions ? (<QuizSummary correctTotal={correctCount} questionCount={quiz.questions.length} />) : null}
+      {quizFinished && quiz.questions ? (
+        <QuizSummary
+          correctTotal={correctCount}
+          questionCount={quiz.questions.length}
+        />
+      ) : null}
       {quiz.questions?.map((question) => {
         return (
-          <Question
+          <QuestionProp
             question={question}
             setSelectedAnswers={setSelectedAnswers}
             selectedAnswer={selectedAnswers[question.id]}

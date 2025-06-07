@@ -1,17 +1,24 @@
 "use client";
 import { useState } from "react";
 import QuestionForm from "./question-form";
+import { QuizDef } from "@/app/lib/definitions";
+import { saveCreatedQuiz } from "@/app/lib/actions";
+import { Session } from "next-auth";
 
-export default function QuizMakerForm() {
+export default function QuizMakerForm({
+  session,
+}: {
+  session: Session | null;
+}) {
   const [quizAmount, setQuizAmount] = useState(5);
-  const [quiz, setQuiz] = useState({
-    category: "",
+  const [quiz, setQuiz] = useState<QuizDef>({
+    category: "General Knowledge",
     questions: Array(quizAmount).fill({
-      category: "",
-      difficulty: "",
+      category: "General Knowledge",
+      difficulty: "easy",
       question: "",
       correctAnswer: "",
-      incorrectAnswers: Array(3).fill(""),
+      inCorrectAnswers: Array(3).fill(""),
       tags: Array(3).fill(""),
       type: "Multiple Choice",
     }),
@@ -34,14 +41,66 @@ export default function QuizMakerForm() {
       };
     });
   };
+
+  const handleCategoryChange = (category: string) => {
+    setQuiz({
+      category: category,
+      questions: quiz.questions.map((question) => {
+        question.category = category;
+        return question;
+      }),
+    });
+  };
+
+  const handleAmountChange = (direction: string) => {
+    if (direction === "up") {
+      setQuizAmount(quizAmount + 1);
+      setQuiz(
+        (prevData) =>
+          ({
+            ...prevData,
+            questions: [
+              ...prevData.questions,
+              {
+                category: "General Knowledge",
+                difficulty: "easy",
+                question: "",
+                correctAnswer: "",
+                inCorrectAnswers: Array(3).fill(""),
+                tags: Array(3).fill(""),
+                type: "Multiple Choice",
+              },
+            ],
+          } as QuizDef)
+      );
+    } else {
+      setQuizAmount(quizAmount - 1);
+      setQuiz(
+        (prevData) =>
+          ({
+            ...prevData,
+            questions: prevData.questions.filter((value, index) => {
+              if (index < quizAmount -1) {
+                return value;
+              }
+            }),
+          } as QuizDef)
+      );
+    }
+  };
+
+  const handleSaveQuiz = async () => {
+    await saveCreatedQuiz(quiz, session as Session);
+  };
+
   return (
     <div>
-      <form action="">
+      <form>
         <select
           name="category"
           id="category"
           className="text-black p-1 mb-4"
-          onChange={(e) => setQuiz({ ...quiz, category: e.target.value })}
+          onChange={(e) => handleCategoryChange(e.target.value)}
         >
           <option value="General Knowledge">General Knowledge</option>
           <option value="Geography">Geography</option>
@@ -55,25 +114,36 @@ export default function QuizMakerForm() {
           <option value="History">History</option>
         </select>
         {[...Array(quizAmount)].map((value, index) => {
-          return <QuestionForm index={index} handleQuestionChange={handleQuestionChange}/>;
+          return (
+            <QuestionForm
+              index={index}
+              handleQuestionChange={handleQuestionChange}
+            />
+          );
         })}
       </form>
       <div className="flex justify-center">
         <button
           className="border border-black rounded-lg bg-component hover:bg-select p-1 transition-colors disabled:bg-gray-400"
-          onClick={() => setQuizAmount(quizAmount + 1)}
+          onClick={() => handleAmountChange("up")}
           disabled={quizAmount === 15}
         >
           Add Question
         </button>
         <button
           className="border border-black rounded-lg bg-component hover:bg-select p-1 transition-colors disabled:bg-gray-400"
-          onClick={() => setQuizAmount(quizAmount - 1)}
+          onClick={() => handleAmountChange("down")}
           disabled={quizAmount === 5}
         >
           Remove Question
         </button>
       </div>
+      <button
+        className="border border-black rounded-lg bg-component hover:bg-select p-1 transition-colors disabled:bg-gray-400"
+        onClick={() => handleSaveQuiz()}
+      >
+        Save Quiz
+      </button>
     </div>
   );
 }

@@ -62,3 +62,46 @@ export async function saveGeneratedQuiz(quiz: QuizDef, session: Session) {
     console.log(error)
   }
 }
+
+export async function saveCreatedQuiz(quiz: QuizDef, session: Session) {
+  try {
+    const user = await prisma.user.findMany({
+      where: {
+        email: session.user?.email as string,
+      },
+    });
+    const generatedQuiz = await prisma.quiz.create({
+      data: {
+        category: quiz.category,
+        created_by: user[0].id,
+      },
+    });
+    const generatedQuestions = await prisma.question.createManyAndReturn({
+      data: quiz.questions
+    })
+    await prisma.q_junction.createMany({
+      data: generatedQuestions.map((question) => {
+        return {quiz_id: generatedQuiz.id, question_id: question.id}
+      })
+    })
+  } catch (error) {
+    console.log(quiz)
+    console.log(session)
+    console.log(error)
+  }
+}
+
+export async function fetchRandomQuestion() {
+  try {
+    const questionCount = await prisma.question.count();
+    const randomIndex = Math.floor(Math.random() * questionCount);
+    const question = await prisma.question.findMany({
+      take: 1,
+      skip: randomIndex,
+    });
+    return question[0]
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch random question.");
+  }
+}
