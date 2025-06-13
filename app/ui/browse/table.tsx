@@ -1,16 +1,17 @@
 import { fetchFilteredQuizzes } from "@/app/lib/data";
 import PlayButton from "@/app/ui/browse/playButton";
+import UpdateButton from "../profile/update-button";
 
 export default async function BrowseTable({
   id,
   currentPage,
   query,
-  tags
+  tags,
 }: {
   id?: string;
   currentPage: number;
   query: string;
-  tags: string[]
+  tags: string[];
 }) {
   const quizzes = await fetchFilteredQuizzes(currentPage, query, tags, id);
   return (
@@ -39,6 +40,11 @@ export default async function BrowseTable({
               <td>
                 <PlayButton id={quiz.id as string} />
               </td>
+              {id ? (
+                <td>
+                  <UpdateButton id={quiz.id as string} />
+                </td>
+              ) : null}
             </tr>
           ))}
         </tbody>

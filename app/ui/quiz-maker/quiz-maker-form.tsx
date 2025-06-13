@@ -7,30 +7,35 @@ import { Session } from "next-auth";
 
 export default function QuizMakerForm({
   session,
+  quiz,
 }: {
   session: Session | null;
+  quiz?: QuizDef;
 }) {
-  const [quizAmount, setQuizAmount] = useState(5);
-  const [quiz, setQuiz] = useState<QuizDef>({
-    category: "General Knowledge",
-    questions: Array(quizAmount).fill({
-      category: "General Knowledge",
-      difficulty: "easy",
-      question: "",
-      correctAnswer: "",
-      inCorrectAnswers: Array(3).fill(""),
-      tags: Array(3).fill(""),
-      type: "Multiple Choice",
-    }),
-  });
-
+  const [quizAmount, setQuizAmount] = quiz
+    ? useState(quiz.questions.length)
+    : useState(5);
+  const [quizState, setQuiz] = quiz
+    ? useState<QuizDef>(quiz)
+    : useState<QuizDef>({
+        category: "General Knowledge",
+        questions: Array(quizAmount).fill({
+          category: "General Knowledge",
+          difficulty: "easy",
+          question: "",
+          correctAnswer: "",
+          incorrectAnswers: Array(3).fill(""),
+          tags: Array(3).fill(""),
+          type: "Multiple Choice",
+        }),
+      });
   const handleQuestionChange = (
     index: number,
     field: string,
     value: string | string[]
   ) => {
     setQuiz((prevData) => {
-      const updatedQuestions = [...quiz.questions];
+      const updatedQuestions = [...quizState.questions];
       updatedQuestions[index] = {
         ...updatedQuestions[index],
         [field]: value,
@@ -45,7 +50,7 @@ export default function QuizMakerForm({
   const handleCategoryChange = (category: string) => {
     setQuiz({
       category: category,
-      questions: quiz.questions.map((question) => {
+      questions: quizState.questions.map((question) => {
         question.category = category;
         return question;
       }),
@@ -80,7 +85,7 @@ export default function QuizMakerForm({
           ({
             ...prevData,
             questions: prevData.questions.filter((value, index) => {
-              if (index < quizAmount -1) {
+              if (index < quizAmount - 1) {
                 return value;
               }
             }),
@@ -90,7 +95,7 @@ export default function QuizMakerForm({
   };
 
   const handleSaveQuiz = async () => {
-    await saveCreatedQuiz(quiz, session as Session);
+    await saveCreatedQuiz(quizState, session as Session);
   };
 
   return (
@@ -101,6 +106,7 @@ export default function QuizMakerForm({
           id="category"
           className="text-black p-1 mb-4"
           onChange={(e) => handleCategoryChange(e.target.value)}
+          defaultValue={quizState.category}
         >
           <option value="General Knowledge">General Knowledge</option>
           <option value="Geography">Geography</option>
@@ -113,10 +119,11 @@ export default function QuizMakerForm({
           <option value="Arts & Literature">Arts & Literature</option>
           <option value="History">History</option>
         </select>
-        {[...Array(quizAmount)].map((value, index) => {
+        {quizState.questions.map((question, index) => {
           return (
             <QuestionForm
               index={index}
+              question={question}
               handleQuestionChange={handleQuestionChange}
             />
           );
