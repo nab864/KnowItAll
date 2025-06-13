@@ -2,15 +2,17 @@ import { fetchFilteredQuizzes } from "@/app/lib/data";
 import PlayButton from "@/app/ui/browse/playButton";
 
 export default async function BrowseTable({
+  id,
   currentPage,
   query,
   tags
 }: {
+  id?: string;
   currentPage: number;
   query: string;
   tags: string[]
 }) {
-  const quizzes = await fetchFilteredQuizzes(currentPage, query, tags);
+  const quizzes = await fetchFilteredQuizzes(currentPage, query, tags, id);
   return (
     <>
       <table className="rounded-xl min-w-30 bg-component">
@@ -35,7 +37,7 @@ export default async function BrowseTable({
               </td>
               <td className="px-3 py-3 text-center">{quiz.questions.length}</td>
               <td>
-                <PlayButton id={quiz.id} />
+                <PlayButton id={quiz.id as string} />
               </td>
             </tr>
           ))}

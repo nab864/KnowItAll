@@ -105,3 +105,70 @@ export async function fetchRandomQuestion() {
     throw new Error("Failed to fetch random question.");
   }
 }
+
+export async function submitFirstName(email: string | undefined, firstName:string | null | undefined) {
+  try {
+    await prisma.user.update({
+      where: {
+        email: email,
+      },
+      data: {
+        first_name: firstName
+      }
+    })
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to submit First Name.");
+  }
+}
+
+export async function submitLastName(email: string | undefined, lastName:string | null | undefined) {
+  try {
+    await prisma.user.update({
+      where: {
+        email: email,
+      },
+      data: {
+        last_name: lastName
+      }
+    })
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to submit First Name.");
+  }
+}
+
+export async function submitUserName(email: string | undefined, userName:string | null | undefined) {
+  try {
+    await prisma.user.update({
+      where: {
+        email: email,
+      },
+      data: {
+        username: userName
+      }
+    })
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to submit First Name.");
+  }
+}
+
+export async function submitEmail(email: string | undefined, newEmail:string | null | undefined) {
+  try {
+    if (!newEmail) {
+      throw new Error("New email must be provided.");
+    }
+    await prisma.user.update({
+      where: {
+        email: email,
+      },
+      data: {
+        email: newEmail
+      }
+    })
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to submit First Name.");
+  }
+}

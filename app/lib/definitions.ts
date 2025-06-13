@@ -4,32 +4,41 @@ export type QuizDef = {
   id?: string;
   created_by?: string;
   category: string;
-  questions: Question[]
-}
+  questions: Question[];
+};
 
 export type TempQuiz = {
   category?: string;
-  questions?: Question[]
-}
+  questions?: Question[];
+};
 
 export type QuizAnswers = {
   [questionId: string]: string;
-}
+};
 
 export type QuestionProps = {
   question: Question;
   setSelectedAnswers: React.Dispatch<React.SetStateAction<QuizAnswers>>;
   selectedAnswer: string;
   quizFinished: boolean;
-}
+};
 
 export type SingleQuestionProps = {
   question: Question;
   setSelectedAnswer: React.Dispatch<React.SetStateAction<string>>;
   selectedAnswer: string;
-}
+};
 
 export type SummaryProps = {
   correctTotal: number;
   questionCount: number;
-}
+};
+
+export type UserData = {
+    email: string;
+    first_name: string | null;
+    last_name: string | null;
+    username: string | null;
+    password: string | null;
+  }
+  | undefined;
