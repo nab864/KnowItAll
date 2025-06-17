@@ -130,32 +130,32 @@ export async function fetchFilteredQuizzes(
   try {
     if (userID) {
       const quizzes = await prisma.quiz.findMany({
-      where: {
-        created_by: userID,
-      },
-      skip: offset,
-      take: ITEMS_PER_PAGE,
-    });
-    const cleanedQuizzes: QuizDef[] = [];
-    for (let i = 0; i < quizzes.length; i++) {
-      const rawQuiz = await prisma.q_junction.findMany({
         where: {
-          quiz_id: quizzes[i].id,
+          created_by: userID,
         },
-        include: {
-          question: true,
-          quiz: true,
-        },
+        skip: offset,
+        take: ITEMS_PER_PAGE,
       });
-      const cleanedQuiz = {
-        id: quizzes[i].id,
-        created_by: quizzes[i].created_by,
-        category: quizzes[i].category,
-        questions: rawQuiz.map((quiz) => quiz.question),
-      };
-      cleanedQuizzes.push(cleanedQuiz);
-    }
-    return cleanedQuizzes;
+      const cleanedQuizzes: QuizDef[] = [];
+      for (let i = 0; i < quizzes.length; i++) {
+        const rawQuiz = await prisma.q_junction.findMany({
+          where: {
+            quiz_id: quizzes[i].id,
+          },
+          include: {
+            question: true,
+            quiz: true,
+          },
+        });
+        const cleanedQuiz = {
+          id: quizzes[i].id,
+          created_by: quizzes[i].created_by,
+          category: quizzes[i].category,
+          questions: rawQuiz.map((quiz) => quiz.question),
+        };
+        cleanedQuizzes.push(cleanedQuiz);
+      }
+      return cleanedQuizzes;
     } else {
       const quizzes = await prisma.quiz.findMany({
         where: {
@@ -167,27 +167,26 @@ export async function fetchFilteredQuizzes(
         take: ITEMS_PER_PAGE,
       });
       const cleanedQuizzes: QuizDef[] = [];
-    for (let i = 0; i < quizzes.length; i++) {
-      const rawQuiz = await prisma.q_junction.findMany({
-        where: {
-          quiz_id: quizzes[i].id,
-        },
-        include: {
-          question: true,
-          quiz: true,
-        },
-      });
-      const cleanedQuiz = {
-        id: quizzes[i].id,
-        created_by: quizzes[i].created_by,
-        category: quizzes[i].category,
-        questions: rawQuiz.map((quiz) => quiz.question),
-      };
-      cleanedQuizzes.push(cleanedQuiz);
+      for (let i = 0; i < quizzes.length; i++) {
+        const rawQuiz = await prisma.q_junction.findMany({
+          where: {
+            quiz_id: quizzes[i].id,
+          },
+          include: {
+            question: true,
+            quiz: true,
+          },
+        });
+        const cleanedQuiz = {
+          id: quizzes[i].id,
+          created_by: quizzes[i].created_by,
+          category: quizzes[i].category,
+          questions: rawQuiz.map((quiz) => quiz.question),
+        };
+        cleanedQuizzes.push(cleanedQuiz);
+      }
+      return cleanedQuizzes;
     }
-    return cleanedQuizzes;
-    }
-    
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Failed to fetch quizzes.");
