@@ -1,5 +1,9 @@
 import UserInfo from "@/app/ui/profile/user_info";
-import { fetchQuizPages, fetchUserData } from "@/app/lib/data";
+import {
+  fetchFilteredQuizzes,
+  fetchQuizPages,
+  fetchUserData,
+} from "@/app/lib/data";
 import { auth } from "@/auth";
 import { Suspense } from "react";
 import { BrowseTableSkeleton } from "@/app/ui/skeletons";
@@ -23,18 +27,19 @@ export default async function Profile(props: {
   }
   const currentPage = Number(searchParams?.page) || 1;
   const totalPages = await fetchQuizPages(query, userData?.id);
+  const quizzes = await fetchFilteredQuizzes(
+    currentPage,
+    query,
+    tags,
+    userData?.id
+  );
 
   return (
     <div className="my-2 flex flex-col items-center">
       <h1 className="text-4xl">Profile</h1>
       <UserInfo userData={userData} />
       <Suspense fallback={<BrowseTableSkeleton />}>
-        <BrowseTable
-          currentPage={currentPage}
-          query={query}
-          tags={tags}
-          id={userData?.id}
-        />
+        <BrowseTable id={userData?.id} quizzes={quizzes} />
       </Suspense>
       <Pagination totalPages={totalPages} />
     </div>

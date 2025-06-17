@@ -40,6 +40,19 @@ export async function generateQuiz(category: string, number: number) {
   return returnObject;
 }
 
+export async function deleteQuiz(id: string) {
+  try {
+    await prisma.quiz.delete({
+      where: {
+        id: id
+      }
+    })
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to delete Quiz.");
+  }
+}
+
 export async function saveGeneratedQuiz(quiz: QuizDef, session: Session) {
   try {
     const user = await prisma.user.findMany({

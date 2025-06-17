@@ -70,7 +70,7 @@ function PaginationArrow({
     "flex h-10 w-10 items-center justify-center rounded-md border",
     {
       "pointer-events-none text-gray-300": isDisabled,
-      "hover:bg-select": !isDisabled,
+      "hover:bg-select transition-colors": !isDisabled,
       "mr-2 md:mr-4": direction === "left",
       "ml-2 md:ml-4": direction === "right",
     }
@@ -109,7 +109,7 @@ function PaginationNumber({
       "rounded-l-md": position === "first" || position === "single",
       "rounded-r-md": position === "last" || position === "single",
       "z-10 bg-main border-main text-foreground": isActive,
-      "hover:bg-select": !isActive && position !== "middle",
+      "hover:bg-select transition-colors": !isActive && position !== "middle",
       "text-foreground": position === "middle",
     }
   );
@@ -117,7 +117,7 @@ function PaginationNumber({
   return isActive || position === "middle" ? (
     <div className={className}>{page}</div>
   ) : (
-    <Link href={href} className={className}>
+    <Link href={href} className={className} scroll={false}>
       {page}
     </Link>
   );
