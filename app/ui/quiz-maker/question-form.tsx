@@ -37,7 +37,7 @@ export default function QuestionForm({
       <input
         type="text"
         placeholder="Question"
-        className="text-black pl-1"
+        className="pl-1 bg-background"
         onChange={(e) =>
           handleQuestionChange(index, "question", e.target.value)
         }
@@ -48,7 +48,7 @@ export default function QuestionForm({
           <input
             type="text"
             placeholder="Correct Answer"
-            className="pl-1 mt-2 mb-1 mr-1"
+            className="pl-1 mt-2 mb-1 mr-1 bg-background"
             onChange={(e) =>
               handleQuestionChange(index, "correctAnswer", e.target.value)
             }
@@ -57,21 +57,21 @@ export default function QuestionForm({
           <input
             type="text"
             placeholder="Incorrect Answer 1"
-            className="pl-1 mt-1 mb-1 mr-1"
+            className="pl-1 mt-1 mb-1 mr-1 bg-background"
             onChange={(e) => {handleInCorrectAnswersChange(0, e.target.value)}}
             value={incorrectAnswersArray[0]}
           />
           <input
             type="text"
             placeholder="Incorrect Answer 2"
-            className="pl-1 mt-1 mb-1 mr-1"
+            className="pl-1 mt-1 mb-1 mr-1 bg-background"
             onChange={(e) => {handleInCorrectAnswersChange(1, e.target.value)}}
             value={incorrectAnswersArray[1]}
           />
           <input
             type="text"
             placeholder="Incorrect Answer 3"
-            className="pl-1 mt-1 mb-1 mr-1"
+            className="pl-1 mt-1 mb-1 mr-1 bg-background"
             onChange={(e) => {handleInCorrectAnswersChange(2, e.target.value)}}
             value={incorrectAnswersArray[2]}
           />
@@ -80,7 +80,7 @@ export default function QuestionForm({
           <select
             name="difficulty"
             id="difficulty"
-            className="text-black mt-2 mb-1 ml-1 p-0.5 pl-1 h-6"
+            className="mt-2 mb-1 ml-1 p-0.5 pl-1 h-6 bg-background"
             defaultValue={question.difficulty}
           >
             <option value="easy">easy</option>
@@ -90,21 +90,21 @@ export default function QuestionForm({
           <input
             type="text"
             placeholder="Tag 1"
-            className="pl-1 mt-1 mb-1 ml-1"
+            className="pl-1 mt-1 mb-1 ml-1 bg-background"
             onChange={(e) => {handleTagsChange(0, e.target.value)}}
             value={tagsArray[0]}
           />
           <input
             type="text"
             placeholder="Tag 2"
-            className="pl-1 mt-1 mb-1 ml-1"
+            className="pl-1 mt-1 mb-1 ml-1 bg-background"
             onChange={(e) => {handleTagsChange(1, e.target.value)}}
             value={tagsArray[1]}
           />
           <input
             type="text"
             placeholder="Tag 3"
-            className="pl-1 mt-1 mb-1 ml-1"
+            className="pl-1 mt-1 mb-1 ml-1 bg-background"
             onChange={(e) => {handleTagsChange(2, e.target.value)}}
             value={tagsArray[2]}
           />

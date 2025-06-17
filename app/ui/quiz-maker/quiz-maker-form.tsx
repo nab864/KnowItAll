@@ -151,6 +151,14 @@ export default function QuizMakerForm({
       >
         Save Quiz
       </button>
+      {quiz ? (
+        <button
+          className="border border-black rounded-lg bg-component hover:bg-select p-1 transition-colors disabled:bg-gray-400"
+          onClick={() => setQuiz(quiz)}
+        >
+          Reset Changes
+        </button>
+      ) : null}
     </div>
   );
 }
