@@ -30,6 +30,6 @@
     ".next/types/**/*.ts",
     "app/lib/trivia-questions.json",
     "scripts/seed.js"
-  ],
+, "app/login/sign-up"  ],
   "exclude": ["node_modules"]
 }

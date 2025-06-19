@@ -2,6 +2,7 @@ import LoginForm from "../ui/forms/login-form";
 import { providerMap, signIn } from "@/auth";
 import Image from "next/image";
 import { Button } from "../ui/buttons";
+import Link from "next/link";
 
 export default function Login(props: {
   searchParams: { callbackUrl: string | undefined };
@@ -35,6 +36,8 @@ export default function Login(props: {
             </Button>
           </form>
         ))}
+        <h1 className="text-center">Don't Have an Account?</h1>
+        <Link href={"/login/sign-up"}>Sign Up</Link>
       </div>
     </main>
   );

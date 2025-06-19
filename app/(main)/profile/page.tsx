@@ -33,15 +33,23 @@ export default async function Profile(props: {
     tags,
     userData?.id
   );
-
+  console.log(session?.user?.image)
   return (
     <div className="my-2 flex flex-col items-center">
       <h1 className="text-4xl">Profile</h1>
-      <UserInfo userData={userData} />
-      <Suspense fallback={<BrowseTableSkeleton />}>
-        <BrowseTable id={userData?.id} quizzes={quizzes} />
-      </Suspense>
-      <Pagination totalPages={totalPages} />
+      <UserInfo userData={userData} image={session?.user?.image}/>
+      {quizzes.length === 0 ? (
+        <div className="bg-component rounded-lg p-1 text-center">
+          <h1>No quizzes created</h1> <h2>Create a quiz to see it here!</h2>
+        </div>
+      ) : (
+        <>
+          <Suspense fallback={<BrowseTableSkeleton />}>
+            <BrowseTable id={userData?.id} quizzes={quizzes} />
+          </Suspense>
+          <Pagination totalPages={totalPages} />
+        </>
+      )}
     </div>
   );
 }

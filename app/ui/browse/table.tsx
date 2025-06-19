@@ -30,12 +30,12 @@ export default function BrowseTable({
   return (
     <>
       <table className="rounded-xl min-w-30 bg-component">
-        <thead className="text-left">
+        <thead className="">
           <tr>
-            <th scope="col" className="px-4 py-5">
+            <th scope="col" className="px-4">
               Category
             </th>
-            <th scope="col" className="px-4 py-8">
+            <th scope="col" className="px-4">
               Number of Questions
             </th>
           </tr>

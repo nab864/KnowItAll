@@ -8,9 +8,16 @@ import {
 import { UserData } from "@/app/lib/definitions";
 import { Button } from "@/app/ui/buttons";
 import clsx from "clsx";
+import Image from "next/image";
 import { useState } from "react";
 
-export default function UserInfo({ userData }: { userData: UserData }) {
+export default function UserInfo({
+  userData,
+  image,
+}: {
+  userData: UserData;
+  image: string | undefined | null;
+}) {
   const [editUserName, setEditUserName] = useState(false);
   const [editFirstName, setEditFirstName] = useState(false);
   const [editLastName, setEditLastName] = useState(false);
@@ -38,17 +45,17 @@ export default function UserInfo({ userData }: { userData: UserData }) {
   };
   return (
     <>
-      <table className="bg-component w-1/4 rounded-lg">
+      <table className="bg-component w-1/4 rounded-lg m-2">
         <tbody className="">
-          <tr className="w-full p-1">
-            <td className="text-right px-1 w-1/3">Username:</td>
-            <td className="text-center px-1 w-1/3">
+          <tr className="w-full">
+            <td className="text-right px-2 w-1/3">Username:</td>
+            <td className="text-center px-2 w-1/3">
               {editUserName ? (
                 <input
                   type="text"
                   id="userName"
                   name="userName"
-                  className="bg-background"
+                  className="bg-background p-2"
                   placeholder={userData?.username ?? "Enter Username"}
                   onChange={(e) => setUserName(e.target.value)}
                 />
@@ -152,8 +159,10 @@ export default function UserInfo({ userData }: { userData: UserData }) {
                 email
               )}
             </td>
-            <td className="text-right px-1 w-1/3">
-              {editEmail ? (
+            <td className="px-1 w-1/3">
+              {image ? (
+                <Image src="github.svg" alt="GitHub" width={50} height={50} className="p-1 block ml-auto" />
+              ) : editEmail ? (
                 <Button
                   children={"Submit"}
                   className="bg-background rounded-lg p-1 hover:bg-select"

@@ -23,7 +23,7 @@ export default function LoginForm() {
               Username
             </label>
             <input
-              className="peer block w-full rounded-md border border-black py-[9px] pl-2 placeholder:text-component"
+              className="peer block w-full rounded-md bg-background py-[9px] pl-2"
               id="username"
               type="text"
               name="username"
@@ -36,7 +36,7 @@ export default function LoginForm() {
               Password
             </label>
             <input
-              className="peer block w-full rounded-md border border-component py-[9px] pl-2 placeholder:text-component"
+              className="peer block w-full rounded-md bg-background py-[9px] pl-2"
               id="password"
               type="password"
               name="password"
