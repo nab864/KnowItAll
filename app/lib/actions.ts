@@ -27,10 +27,7 @@ export async function authenticate(
   }
 }
 
-export async function signup(
-  prevState: FormState,
-  formData: FormData
-) {
+export async function signup(prevState: FormState, formData: FormData) {
   const validatedFields = SignupFormSchema.safeParse({
     username: formData.get("username"),
     firstname: formData.get("firstname"),
@@ -122,14 +119,18 @@ export async function saveCreatedQuiz(quiz: QuizDef, session: Session) {
         email: session.user?.email as string,
       },
     });
+
     const generatedQuiz = await prisma.quiz.create({
       data: {
         category: quiz.category,
         created_by: user[0].id,
       },
     });
+
     const generatedQuestions = await prisma.question.createManyAndReturn({
-      data: quiz.questions,
+      data: quiz.questions.map((question) => {
+        return { ...question, created_by: user[0].id };
+      }),
     });
     await prisma.q_junction.createMany({
       data: generatedQuestions.map((question) => {
@@ -137,8 +138,37 @@ export async function saveCreatedQuiz(quiz: QuizDef, session: Session) {
       }),
     });
   } catch (error) {
-    console.log(quiz);
-    console.log(session);
+    console.log(error);
+  }
+}
+
+export async function updateQuiz(quiz: QuizDef, session: Session) {
+  try {
+    for (let i=0; i<quiz.questions.length; i++) {
+      await prisma.question.update({
+        where: {
+          id: quiz.questions[i].id,
+        },
+        data: {
+          category: quiz.questions[i].category,
+          tags: quiz.questions[i].tags,
+          difficulty: quiz.questions[i].difficulty,
+          question: quiz.questions[i].question,
+          correctAnswer: quiz.questions[i].correctAnswer,
+          incorrectAnswers: quiz.questions[i].incorrectAnswers,
+          type: quiz.questions[i].type,
+        }
+      })
+    }
+    await prisma.quiz.update({
+      where: {
+        id: quiz.id,
+      },
+      data: {
+        category: quiz.category
+      }
+    })
+  } catch (error) {
     console.log(error);
   }
 }

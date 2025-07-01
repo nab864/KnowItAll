@@ -2,7 +2,7 @@
 import { useState } from "react";
 import QuestionForm from "./question-form";
 import { QuizDef } from "@/app/lib/definitions";
-import { saveCreatedQuiz } from "@/app/lib/actions";
+import { saveCreatedQuiz, updateQuiz } from "@/app/lib/actions";
 import { Session } from "next-auth";
 
 export default function QuizMakerForm({
@@ -24,7 +24,7 @@ export default function QuizMakerForm({
           difficulty: "easy",
           question: "",
           correctAnswer: "",
-          incorrectAnswers: Array(3).fill(""),
+          incorrectAnswers: ["", "", ""],
           tags: Array(3).fill(""),
           type: "Multiple Choice",
         }),
@@ -95,7 +95,11 @@ export default function QuizMakerForm({
   };
 
   const handleSaveQuiz = async () => {
-    await saveCreatedQuiz(quizState, session as Session);
+    if (quiz) {
+      await updateQuiz(quizState, session as Session);
+    } else {
+      await saveCreatedQuiz(quizState, session as Session);
+    }
   };
 
   return (
@@ -123,7 +127,7 @@ export default function QuizMakerForm({
           return (
             <QuestionForm
               index={index}
-              question={question}
+              question={quizState.questions[index]}
               handleQuestionChange={handleQuestionChange}
             />
           );

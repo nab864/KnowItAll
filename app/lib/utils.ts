@@ -1,4 +1,3 @@
-import { Question } from "@prisma/client";
 
 export const generatePagination = (currentPage: number, totalPages: number) => {
   // If the total number of pages is 7 or less,
@@ -36,3 +35,5 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
 export function shuffleQuestions<T>(questions: T[]): T[] {
   return questions.sort(() => Math.random() - 0.5);
 };
+
+

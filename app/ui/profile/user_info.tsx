@@ -161,7 +161,7 @@ export default function UserInfo({
             </td>
             <td className="px-1 w-1/3">
               {image ? (
-                <Image src="github.svg" alt="GitHub" width={50} height={50} className="p-1 block ml-auto" />
+                <Image src="/github.svg" alt="GitHub" width={50} height={50} className="p-1 block ml-auto" />
               ) : editEmail ? (
                 <Button
                   children={"Submit"}

@@ -14,25 +14,22 @@ export default function QuestionForm({
     value: string | string[]
   ) => void;
 }) {
-  const [incorrectAnswersArray, setIncorrectAnswersArray] = useState(question.incorrectAnswers);
-  const [tagsArray, setTagsArray] = useState(question.tags);
 
-  const handleInCorrectAnswersChange = (arrayIndex: number, value:string) => {
-    const currentArray = incorrectAnswersArray
-    currentArray[arrayIndex] = value
-    setIncorrectAnswersArray(currentArray)
-    handleQuestionChange(index, "inCorrectAnswers", currentArray)
+  const handleInCorrectAnswersChange = (arrayIndex: number, value: string) => {
+      const currentArray = [...question.incorrectAnswers];
+      currentArray[arrayIndex] = value;
+      handleQuestionChange(index, "incorrectAnswers", currentArray);
+    
   }
   
   const handleTagsChange = (arrayIndex: number, value:string) => {
-    const currentArray = tagsArray
-    currentArray[arrayIndex] = value
-    setTagsArray(currentArray)
+    const currentArray = [...question.tags];
+    currentArray[arrayIndex] = value;
     handleQuestionChange(index, "tags", currentArray)
   }
   
   return (
-    <div className="flex flex-col border border-black rounded-xl p-3 bg-component m-1">
+    <div className="flex flex-col border border-black rounded-xl p-3 bg-component m-1" >
       <h1 className="text-lg">{`Question ${index + 1}`}</h1>
       <input
         type="text"
@@ -59,21 +56,21 @@ export default function QuestionForm({
             placeholder="Incorrect Answer 1"
             className="pl-1 mt-1 mb-1 mr-1 bg-background"
             onChange={(e) => {handleInCorrectAnswersChange(0, e.target.value)}}
-            value={incorrectAnswersArray[0]}
+            value={question.incorrectAnswers[0]}
           />
           <input
             type="text"
             placeholder="Incorrect Answer 2"
             className="pl-1 mt-1 mb-1 mr-1 bg-background"
             onChange={(e) => {handleInCorrectAnswersChange(1, e.target.value)}}
-            value={incorrectAnswersArray[1]}
+            value={question.incorrectAnswers[1]}
           />
           <input
             type="text"
             placeholder="Incorrect Answer 3"
             className="pl-1 mt-1 mb-1 mr-1 bg-background"
             onChange={(e) => {handleInCorrectAnswersChange(2, e.target.value)}}
-            value={incorrectAnswersArray[2]}
+            value={question.incorrectAnswers[2]}
           />
         </div>
         <div className="flex flex-col">
@@ -82,6 +79,9 @@ export default function QuestionForm({
             id="difficulty"
             className="mt-2 mb-1 ml-1 p-0.5 pl-1 h-6 bg-background"
             defaultValue={question.difficulty}
+            onChange={(e) =>
+              handleQuestionChange(index, "difficulty", e.target.value)
+            }
           >
             <option value="easy">easy</option>
             <option value="medium">medium</option>
@@ -92,21 +92,21 @@ export default function QuestionForm({
             placeholder="Tag 1"
             className="pl-1 mt-1 mb-1 ml-1 bg-background"
             onChange={(e) => {handleTagsChange(0, e.target.value)}}
-            value={tagsArray[0]}
+            value={question.tags[0]}
           />
           <input
             type="text"
             placeholder="Tag 2"
             className="pl-1 mt-1 mb-1 ml-1 bg-background"
             onChange={(e) => {handleTagsChange(1, e.target.value)}}
-            value={tagsArray[1]}
+            value={question.tags[1]}
           />
           <input
             type="text"
             placeholder="Tag 3"
             className="pl-1 mt-1 mb-1 ml-1 bg-background"
             onChange={(e) => {handleTagsChange(2, e.target.value)}}
-            value={tagsArray[2]}
+            value={question.tags[2]}
           />
         </div>
       </div>
