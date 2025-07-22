@@ -12,8 +12,8 @@ export default function Quiz({ id, quiz }: { id: string; quiz: QuizDef }) {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    window.scrollTo(0, 0);
-    if (quiz.questions) {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    if (!quizFinished) {
       for (let i = 0; i < quiz.questions.length; i++) {
         if (
           quiz.questions[i].correctAnswer ===
@@ -23,8 +23,12 @@ export default function Quiz({ id, quiz }: { id: string; quiz: QuizDef }) {
         }
       }
       setQuizFinished(true);
-      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    } else {
+      setQuizFinished(false)
+      setCorrectCount(0)
+      setSelectedAnswers({})
     }
+    
   };
 
   const handleRestart = () => {
@@ -55,7 +59,7 @@ export default function Quiz({ id, quiz }: { id: string; quiz: QuizDef }) {
       })}
       <Button
         type="submit"
-        children="Submit Quiz"
+        children={quizFinished ? "Reset Quiz" : "Submit Quiz"}
         className="bg-component rounded-lg p-1 hover:bg-select transition-colors"
       />
     </form>

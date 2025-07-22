@@ -4,6 +4,7 @@ import QuestionForm from "./question-form";
 import { QuizDef } from "@/app/lib/definitions";
 import { saveCreatedQuiz, updateQuiz } from "@/app/lib/actions";
 import { Session } from "next-auth";
+import { useRouter } from "next/navigation";
 
 export default function QuizMakerForm({
   session,
@@ -12,6 +13,7 @@ export default function QuizMakerForm({
   session: Session | null;
   quiz?: QuizDef;
 }) {
+  const router = useRouter();
   const [quizAmount, setQuizAmount] = quiz
     ? useState(quiz.questions.length)
     : useState(5);
@@ -97,6 +99,7 @@ export default function QuizMakerForm({
   const handleSaveQuiz = async () => {
     if (quiz) {
       await updateQuiz(quizState, session as Session);
+      router.back()
     } else {
       await saveCreatedQuiz(quizState, session as Session);
     }

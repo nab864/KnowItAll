@@ -8,9 +8,6 @@ export default function MainLayout({
 }) {
   return (
     <div className="relative">
-      <div className="absolute right-0">
-        <TopNav />
-      </div>
       <div className="flex">
           <SideNav />
           <div className="grow">{children}</div>

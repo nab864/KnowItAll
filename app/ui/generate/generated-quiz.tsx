@@ -4,6 +4,7 @@ import { Button } from "../buttons";
 import { auth } from "@/auth";
 import { Session } from "next-auth";
 import { saveGeneratedQuiz } from "@/app/lib/actions";
+import { useRouter } from "next/navigation";
 
 export default function GeneratedQuiz({
   quiz,
@@ -14,8 +15,10 @@ export default function GeneratedQuiz({
   fetchQuiz: () => Promise<void>;
   session: Session | null;
 }) {
+  const router = useRouter()
   const saveQuiz = async () => {
     await saveGeneratedQuiz(quiz, session as Session)
+    router.push("/profile")
   }
   return (
     <div className="flex flex-col items-center mt-4 w-full">
