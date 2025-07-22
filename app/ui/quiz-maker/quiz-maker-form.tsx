@@ -31,6 +31,7 @@ export default function QuizMakerForm({
           type: "Multiple Choice",
         }),
       });
+      
   const handleQuestionChange = (
     index: number,
     field: string,
