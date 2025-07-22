@@ -1,5 +1,4 @@
 import { Question } from "@prisma/client";
-import { useState } from "react";
 
 export default function QuestionForm({
   index,

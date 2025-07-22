@@ -2,7 +2,7 @@
 import { SingleQuestionProps } from "@/app/lib/definitions";
 import { shuffleQuestions } from "@/app/lib/utils";
 import clsx from "clsx";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export const SingleQuestion: React.FC<SingleQuestionProps> = ({
   question,

@@ -35,7 +35,7 @@ export default function Login() {
             </Button>
           </form>
         ))}
-        <h1 className="text-center">Don't Have an Account?</h1>
+        <h1 className="text-center">{"Don't Have an Account?"}</h1>
         <Link href={"/login/sign-up"}>Sign Up</Link>
       </div>
     </main>
