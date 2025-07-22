@@ -142,7 +142,7 @@ export async function saveCreatedQuiz(quiz: QuizDef, session: Session) {
   }
 }
 
-export async function updateQuiz(quiz: QuizDef, session: Session) {
+export async function updateQuiz(quiz: QuizDef) {
   try {
     for (let i=0; i<quiz.questions.length; i++) {
       await prisma.question.update({

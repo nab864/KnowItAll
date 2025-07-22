@@ -239,6 +239,7 @@ export async function fetchQuiz(id: string) {
     };
     return refinedQuiz;
   } catch (error) {
+    console.error("Database Error:", error);
     throw new Error("Failed to fetch Quiz.");
   }
 }

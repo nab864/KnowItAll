@@ -2,7 +2,7 @@
 import { SingleQuestionProps } from "@/app/lib/definitions";
 import { shuffleQuestions } from "@/app/lib/utils";
 import clsx from "clsx";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export const SingleQuestion: React.FC<SingleQuestionProps> = ({
   question,
@@ -10,6 +10,11 @@ export const SingleQuestion: React.FC<SingleQuestionProps> = ({
   selectedAnswer,
 }) => {
   const [answers, setAnswers] = useState<string[]>([]);
+  const memoizedSetSelectedAnswer = useCallback(
+    (answer: string) => setSelectedAnswer(answer),
+    [setSelectedAnswer]
+  );
+
   useEffect(() => {
     const unshuffledAnswer = [
       ...question.incorrectAnswers,
@@ -17,7 +22,7 @@ export const SingleQuestion: React.FC<SingleQuestionProps> = ({
     ];
     setAnswers(shuffleQuestions(unshuffledAnswer));
     setSelectedAnswer("");
-  }, [question]);
+  }, [question, memoizedSetSelectedAnswer]);
 
   return (
     <>

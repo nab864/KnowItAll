@@ -1,4 +1,3 @@
-import Button from "@/app/ui/navigation/button";
 import Link from "next/link";
 
 export default function Page() {

@@ -1,5 +1,4 @@
 import SideNav from "@/app/ui/sidenav";
-import TopNav from "@/app/ui/topbar";
 
 export default function MainLayout({
   children,

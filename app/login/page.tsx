@@ -4,16 +4,15 @@ import Image from "next/image";
 import { Button } from "../ui/buttons";
 import Link from "next/link";
 
-export default function Login(props: {
-  searchParams: { callbackUrl: string | undefined };
-}) {
+export default function Login() {
   return (
     <main className="flex items-center justify-center md:h-screen">
       <div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4 md:-mt-32">
         <LoginForm />
         <h1 className="text-center">Or Sign In Using</h1>
-        {Object.values(providerMap).map((provider) => (
+        {Object.values(providerMap).map((provider, index) => (
           <form
+          key={index}
             action={async () => {
               "use server";
               try {

@@ -98,7 +98,7 @@ export default function QuizMakerForm({
 
   const handleSaveQuiz = async () => {
     if (quiz) {
-      await updateQuiz(quizState, session as Session);
+      await updateQuiz(quizState);
       router.back()
     } else {
       await saveCreatedQuiz(quizState, session as Session);
