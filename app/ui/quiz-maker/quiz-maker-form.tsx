@@ -132,6 +132,7 @@ export default function QuizMakerForm({
               index={index}
               question={quizState.questions[index]}
               handleQuestionChange={handleQuestionChange}
+              key={index}
             />
           );
         })}

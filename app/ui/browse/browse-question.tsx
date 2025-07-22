@@ -10,10 +10,6 @@ export const SingleQuestion: React.FC<SingleQuestionProps> = ({
   selectedAnswer,
 }) => {
   const [answers, setAnswers] = useState<string[]>([]);
-  const memoizedSetSelectedAnswer = useCallback(
-    (answer: string) => setSelectedAnswer(answer),
-    [setSelectedAnswer]
-  );
 
   useEffect(() => {
     const unshuffledAnswer = [
@@ -22,7 +18,7 @@ export const SingleQuestion: React.FC<SingleQuestionProps> = ({
     ];
     setAnswers(shuffleQuestions(unshuffledAnswer));
     setSelectedAnswer("");
-  }, [question, memoizedSetSelectedAnswer]);
+  }, [question]);
 
   return (
     <>
@@ -37,10 +33,10 @@ export const SingleQuestion: React.FC<SingleQuestionProps> = ({
               <div
                 key={index}
                 className={clsx({
-                  "hover:bg-select": answer !== selectedAnswer && !selectedAnswer,
+                  "hover:bg-select":
+                    answer !== selectedAnswer && !selectedAnswer,
                   "bg-green-800":
-                    selectedAnswer &&
-                    answer === question.correctAnswer,
+                    selectedAnswer && answer === question.correctAnswer,
                   "bg-red-700":
                     answer === selectedAnswer &&
                     selectedAnswer !== question.correctAnswer,

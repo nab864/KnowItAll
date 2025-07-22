@@ -1,12 +1,7 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Dispatch, SetStateAction, useEffect } from "react";
-import { generateQuiz } from "@/app/lib/actions";
+import { useEffect } from "react";
 
-export default function GenerateForm({
-  fetchQuiz,
-}: {
-  fetchQuiz: () => void;
-}) {
+export default function GenerateForm({ fetchQuiz }: { fetchQuiz: () => void }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -16,7 +11,7 @@ export default function GenerateForm({
     params.set("number", "10");
     params.set("category", "General Knowledge");
     replace(`${pathname}?${params.toString()}`);
-  }, []);
+  });
 
   const handleCategoryChange = async (value: string) => {
     const params = new URLSearchParams(searchParams);
@@ -30,9 +25,11 @@ export default function GenerateForm({
     replace(`${pathname}?${params.toString()}`);
   };
 
-
   return (
-    <form className="flex flex-col bg-component p-2 rounded-lg" action={fetchQuiz}>
+    <form
+      className="flex flex-col bg-component p-2 rounded-lg"
+      action={fetchQuiz}
+    >
       <select
         name="category"
         id="category"

@@ -5,7 +5,6 @@ import { useActionState } from "react";
 import { Button } from "../buttons";
 import {
   ArrowRightIcon,
-  ExclamationCircleIcon,
 } from "@heroicons/react/24/outline";
 
 export default function SignUpForm() {

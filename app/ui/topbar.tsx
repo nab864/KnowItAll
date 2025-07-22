@@ -2,7 +2,6 @@ import SignIn from "./forms/sign-in";
 import SignOut from "./forms/sign-out";
 import { auth } from "@/auth";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
 import Link from "next/link";
 

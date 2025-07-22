@@ -66,16 +66,18 @@ export default function UserInfo({
             <td className="text-right px-1 w-1/3">
               {editUserName ? (
                 <Button
-                  children={"Submit"}
                   className="bg-background rounded-lg p-1 hover:bg-select"
                   onClick={handleUserNameClick}
-                />
+                >
+                  Submit
+                </Button>
               ) : (
                 <Button
-                  children={userData?.first_name ? "Update" : "Add"}
                   className="bg-background rounded-lg p-1 hover:bg-select"
                   onClick={() => setEditUserName(true)}
-                />
+                >
+                  {userData?.username ? "Update" : "Add"}
+                </Button>
               )}
             </td>
           </tr>
@@ -98,16 +100,18 @@ export default function UserInfo({
             <td className="text-right px-1 w-1/3">
               {editFirstName ? (
                 <Button
-                  children={"Submit"}
                   className="bg-background rounded-lg p-1 hover:bg-select"
                   onClick={handleFirstNameClick}
-                />
+                >
+                  Submit
+                </Button>
               ) : (
                 <Button
-                  children={userData?.first_name ? "Update" : "Add"}
                   className="bg-background rounded-lg p-1 hover:bg-select"
                   onClick={() => setEditFirstName(true)}
-                />
+                >
+                  {userData?.first_name ? "Update" : "Add"}
+                </Button>
               )}
             </td>
           </tr>
@@ -130,16 +134,18 @@ export default function UserInfo({
             <td className="text-right px-1 w-1/3">
               {editLastName ? (
                 <Button
-                  children={"Submit"}
                   className="bg-background rounded-lg p-1 hover:bg-select"
                   onClick={handleLastNameClick}
-                />
+                >
+                  Submit
+                </Button>
               ) : (
                 <Button
-                  children={userData?.first_name ? "Update" : "Add"}
                   className="bg-background rounded-lg p-1 hover:bg-select"
                   onClick={() => setEditLastName(true)}
-                />
+                >
+                  {userData?.last_name ? "Update" : "Add"}
+                </Button>
               )}
             </td>
           </tr>
@@ -161,16 +167,22 @@ export default function UserInfo({
             </td>
             <td className="px-1 w-1/3">
               {image ? (
-                <Image src="/github.svg" alt="GitHub" width={50} height={50} className="p-1 block ml-auto" />
+                <Image
+                  src="/github.svg"
+                  alt="GitHub"
+                  width={50}
+                  height={50}
+                  className="p-1 block ml-auto"
+                />
               ) : editEmail ? (
                 <Button
-                  children={"Submit"}
                   className="bg-background rounded-lg p-1 hover:bg-select"
                   onClick={handleEmailClick}
-                />
+                >
+                  Submit
+                </Button>
               ) : (
                 <Button
-                  children={userData?.first_name ? "Update" : "Add"}
                   className={clsx(
                     "bg-background rounded-lg p-1 hover:bg-select",
                     {
@@ -179,7 +191,9 @@ export default function UserInfo({
                     }
                   )}
                   onClick={() => setEditEmail(true)}
-                />
+                >
+                  {userData?.email ? "Update" : "Add"}
+                </Button>
               )}
             </td>
           </tr>
