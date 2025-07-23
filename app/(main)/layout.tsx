@@ -1,4 +1,5 @@
 import SideNav from "@/app/ui/sidenav";
+import TopNav from "@/app/ui/topbar";
 
 export default function MainLayout({
   children,
@@ -8,8 +9,11 @@ export default function MainLayout({
   return (
     <div className="relative">
       <div className="flex">
-          <SideNav />
-          <div className="grow">{children}</div>
+        <div className="absolute right-0">
+          <TopNav />
+        </div>
+        <SideNav />
+        <div className="grow">{children}</div>
       </div>
     </div>
   );
