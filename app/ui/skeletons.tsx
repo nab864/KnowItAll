@@ -16,30 +16,28 @@ export function TableRowSkeleton() {
 
 export function BrowseTableSkeleton() {
   return (
-    <div>
-      <table className="border rounded-xl min-w-40 bg-component">
-        <thead className="text-left">
-          <tr>
-            <th scope="col" className="px-4 py-8">
-            <div className="w-[8ch] h-[2rem] bg-select motion-safe:animate-pulse rounded"></div>
-            </th>
-            <th scope="col" className="px-4 py-5">
-            <div className="w-[18ch] h-[2rem] bg-select motion-safe:animate-pulse rounded"></div>
-            </th>
-          </tr>
-        </thead>
-        <tbody className="">
-          <TableRowSkeleton />
-          <TableRowSkeleton />
-          <TableRowSkeleton />
-          <TableRowSkeleton />
-          <TableRowSkeleton />
-          <TableRowSkeleton />
-          <TableRowSkeleton />
-          <TableRowSkeleton />
-          <TableRowSkeleton />
-        </tbody>
-      </table>
-    </div>
+    <table className="rounded-xl min-w-30 bg-component">
+      <thead className="">
+        <tr>
+          <th scope="col" className="px-4">
+            Category
+          </th>
+          <th scope="col" className="px-4">
+            Number of Questions
+          </th>
+        </tr>
+      </thead>
+      <tbody className="">
+        <TableRowSkeleton />
+        <TableRowSkeleton />
+        <TableRowSkeleton />
+        <TableRowSkeleton />
+        <TableRowSkeleton />
+        <TableRowSkeleton />
+        <TableRowSkeleton />
+        <TableRowSkeleton />
+        <TableRowSkeleton />
+      </tbody>
+    </table>
   );
 }

@@ -9,12 +9,12 @@ export default function SideNav() {
         <Button
           urlRef="/browse"
           text="Browse"
-          className="flex flex-col my-0.5 text-center rounded-lg hover:bg-select"
+          className="flex flex-col my-0.5 text-center rounded-lg hover:bg-select transition-colors"
         ></Button>
         <Button
           urlRef="/create"
           text="Create"
-          className="flex flex-col my-0.5 text-center rounded-lg hover:bg-select"
+          className="flex flex-col my-0.5 text-center rounded-lg hover:bg-select transition-colors"
         ></Button>
       </div>
     </div>

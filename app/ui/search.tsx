@@ -21,12 +21,13 @@ export default function Search({ placeholder }: { placeholder: string }) {
   return (
     <div className="bg-component mb-3 p-2 relative rounded-lg">
       <label htmlFor="search" className="">
-        <MagnifyingGlassIcon className="absolute w-6 top-3 left-3" />
+        <MagnifyingGlassIcon className="absolute w-6 top-3 left-3 select-none" />
         <input
           className="pl-8 bg-background py-1 text-foreground"
           type="text"
           placeholder={placeholder}
           onChange={(e) => handleSearch(e.target.value)}
+          
         />
       </label>
     </div>

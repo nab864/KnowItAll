@@ -11,7 +11,7 @@ export default function GenerateForm({ fetchQuiz }: { fetchQuiz: () => void }) {
     params.set("number", "10");
     params.set("category", "General Knowledge");
     replace(`${pathname}?${params.toString()}`);
-  });
+  }, []);
 
   const handleCategoryChange = async (value: string) => {
     const params = new URLSearchParams(searchParams);
