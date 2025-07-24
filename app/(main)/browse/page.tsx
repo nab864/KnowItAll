@@ -26,9 +26,8 @@ export default async function Page(props: {
       tags,
     );
   return (
-    <div className="flex flex-col items-center mt-2">
-      <h1>Browse Page</h1>
-      <Search placeholder="Seach quizzes..." />
+    <div className="flex flex-col items-center mt-10">
+      <Search placeholder="Seach category..." />
       <Suspense fallback={<BrowseTableSkeleton />}>
         <BrowseTable quizzes={quizzes}/>
       </Suspense>

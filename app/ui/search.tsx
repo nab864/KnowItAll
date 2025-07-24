@@ -1,6 +1,7 @@
 "use client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
+import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
 
 export default function Search({ placeholder }: { placeholder: string }) {
   const searchParams = useSearchParams();
@@ -18,9 +19,16 @@ export default function Search({ placeholder }: { placeholder: string }) {
     replace(`${pathname}?${params.toString()}`);
   }, 100);
   return (
-    <div>
-      <label htmlFor="search">Search</label>
-      <input type="text" placeholder={placeholder} onChange={(e) => handleSearch(e.target.value)}/>
+    <div className="bg-component mb-3 p-2 relative rounded-lg">
+      <label htmlFor="search" className="">
+        <MagnifyingGlassIcon className="absolute w-6 top-3 left-3" />
+        <input
+          className="pl-8 bg-background py-1 text-foreground"
+          type="text"
+          placeholder={placeholder}
+          onChange={(e) => handleSearch(e.target.value)}
+        />
+      </label>
     </div>
-  )
+  );
 }
