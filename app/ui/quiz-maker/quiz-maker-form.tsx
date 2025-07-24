@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import QuestionForm from "./question-form";
 import { QuizDef } from "@/app/lib/definitions";
 import { saveCreatedQuiz, updateQuiz } from "@/app/lib/actions";
@@ -14,12 +14,8 @@ export default function QuizMakerForm({
   quiz?: QuizDef;
 }) {
   const router = useRouter();
-  const [quizAmount, setQuizAmount] = quiz
-    ? useState(quiz.questions.length)
-    : useState(5);
-  const [quizState, setQuiz] = quiz
-    ? useState<QuizDef>(quiz)
-    : useState<QuizDef>({
+  const [quizAmount, setQuizAmount] = useState(5);
+  const [quizState, setQuiz] = useState<QuizDef>({
         category: "General Knowledge",
         questions: Array(quizAmount).fill({
           category: "General Knowledge",
@@ -31,7 +27,13 @@ export default function QuizMakerForm({
           type: "Multiple Choice",
         }),
       });
-      
+  useEffect(() => {
+    if (quiz) {
+      setQuizAmount(quiz.questions.length)
+      setQuiz(quiz)
+    }
+  }, [])
+
   const handleQuestionChange = (
     index: number,
     field: string,
