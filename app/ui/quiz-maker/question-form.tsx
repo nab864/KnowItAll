@@ -28,7 +28,7 @@ export default function QuestionForm({
   }
   
   return (
-    <div className="flex flex-col border border-black rounded-xl p-3 bg-component m-1" >
+    <div className="flex flex-col rounded-xl p-3 bg-component m-1" >
       <h1 className="text-lg">{`Question ${index + 1}`}</h1>
       <input
         type="text"

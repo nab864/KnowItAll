@@ -16,23 +16,23 @@ export default function QuizMakerForm({
   const router = useRouter();
   const [quizAmount, setQuizAmount] = useState(5);
   const [quizState, setQuiz] = useState<QuizDef>({
-        category: "General Knowledge",
-        questions: Array(quizAmount).fill({
-          category: "General Knowledge",
-          difficulty: "easy",
-          question: "",
-          correctAnswer: "",
-          incorrectAnswers: ["", "", ""],
-          tags: Array(3).fill(""),
-          type: "Multiple Choice",
-        }),
-      });
+    category: "General Knowledge",
+    questions: Array(quizAmount).fill({
+      category: "General Knowledge",
+      difficulty: "easy",
+      question: "",
+      correctAnswer: "",
+      incorrectAnswers: ["", "", ""],
+      tags: Array(3).fill(""),
+      type: "Multiple Choice",
+    }),
+  });
   useEffect(() => {
     if (quiz) {
-      setQuizAmount(quiz.questions.length)
-      setQuiz(quiz)
+      setQuizAmount(quiz.questions.length);
+      setQuiz(quiz);
     }
-  }, [])
+  }, []);
 
   const handleQuestionChange = (
     index: number,
@@ -102,7 +102,7 @@ export default function QuizMakerForm({
   const handleSaveQuiz = async () => {
     if (quiz) {
       await updateQuiz(quizState);
-      router.back()
+      router.back();
     } else {
       await saveCreatedQuiz(quizState, session as Session);
     }
@@ -111,24 +111,27 @@ export default function QuizMakerForm({
   return (
     <div>
       <form>
-        <select
-          name="category"
-          id="category"
-          className="text-black p-1 mb-4"
-          onChange={(e) => handleCategoryChange(e.target.value)}
-          defaultValue={quizState.category}
-        >
-          <option value="General Knowledge">General Knowledge</option>
-          <option value="Geography">Geography</option>
-          <option value="Society & Culture">Society & Culture</option>
-          <option value="Music">Music</option>
-          <option value="Food & Drink">Food & Drink</option>
-          <option value="Sport & Leisure">Sport & Leisure</option>
-          <option value="Film & TV">Film & TV</option>
-          <option value="Science">Science</option>
-          <option value="Arts & Literature">Arts & Literature</option>
-          <option value="History">History</option>
-        </select>
+        <div className="flex justify-between">
+          <h1 className="text-2xl">Create your own Quiz</h1>
+          <select
+            name="category"
+            id="category"
+            className="text-black p-1 mb-4"
+            onChange={(e) => handleCategoryChange(e.target.value)}
+            defaultValue={quizState.category}
+          >
+            <option value="General Knowledge">General Knowledge</option>
+            <option value="Geography">Geography</option>
+            <option value="Society & Culture">Society & Culture</option>
+            <option value="Music">Music</option>
+            <option value="Food & Drink">Food & Drink</option>
+            <option value="Sport & Leisure">Sport & Leisure</option>
+            <option value="Film & TV">Film & TV</option>
+            <option value="Science">Science</option>
+            <option value="Arts & Literature">Arts & Literature</option>
+            <option value="History">History</option>
+          </select>
+        </div>
         {quizState.questions.map((question, index) => {
           return (
             <QuestionForm
@@ -140,36 +143,41 @@ export default function QuizMakerForm({
           );
         })}
       </form>
-      <div className="flex justify-center">
+      <div className="flex justify-between">
         <button
-          className="border border-black rounded-lg bg-component hover:bg-select p-1 transition-colors disabled:bg-gray-400"
+          className="rounded-lg bg-component hover:bg-select p-1 transition-colors disabled:bg-gray-400"
           onClick={() => handleAmountChange("up")}
           disabled={quizAmount === 15}
         >
           Add Question
         </button>
         <button
-          className="border border-black rounded-lg bg-component hover:bg-select p-1 transition-colors disabled:bg-gray-400"
+          className="rounded-lg bg-component hover:bg-select p-1 transition-colors disabled:bg-gray-400"
           onClick={() => handleAmountChange("down")}
           disabled={quizAmount === 5}
         >
           Remove Question
         </button>
       </div>
-      <button
-        className="border border-black rounded-lg bg-component hover:bg-select p-1 transition-colors disabled:bg-gray-400"
-        onClick={() => handleSaveQuiz()}
-      >
-        Save Quiz
-      </button>
-      {quiz ? (
-        <button
-          className="border border-black rounded-lg bg-component hover:bg-select p-1 transition-colors disabled:bg-gray-400"
-          onClick={() => setQuiz(quiz)}
-        >
-          Reset Changes
-        </button>
-      ) : null}
+      <div className="flex justify-center mt-4">
+        {session?.user ? (
+          <button
+            className="rounded-lg bg-component hover:bg-select p-1 transition-color mr-1"
+            onClick={() => handleSaveQuiz()}
+          >
+            Save Quiz
+          </button>
+        ) : null}
+
+        {quiz ? (
+          <button
+            className="rounded-lg bg-component hover:bg-select p-1 ml-1 transition-colors disabled:bg-gray-400"
+            onClick={() => setQuiz(quiz)}
+          >
+            Reset Changes
+          </button>
+        ) : null}
+      </div>
     </div>
   );
 }
