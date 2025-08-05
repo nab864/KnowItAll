@@ -15,7 +15,7 @@ export default async function Page(props: {
   const number = searchParams?.number || ""
   
   return (
-    <div className="flex flex-col justify-center items-center h-full ml-44 mt-10">
+    <div className="flex flex-col justify-center items-center h-full text-center mt-10">
       <h1>Generate Quiz</h1>
       <GeneratePage number={number} category={category} session={session} />
     </div>
