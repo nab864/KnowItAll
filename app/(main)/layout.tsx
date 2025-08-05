@@ -8,11 +8,8 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative">
+    <div className="">
       <div className="flex">
-        <div className="absolute right-0">
-          <TopNav />
-        </div>
         <SideNav />
         <Suspense>
           <div className="grow">{children}</div>

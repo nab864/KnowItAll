@@ -29,7 +29,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background`}
       >
-        <div className="absolute right-0">
+        <div className="sm:absolute sm:right-0">
           <TopNav />
         </div>
         {children}

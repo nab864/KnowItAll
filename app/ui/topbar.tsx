@@ -4,33 +4,42 @@ import { auth } from "@/auth";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import Image from "next/image";
 import Link from "next/link";
+import NavBar from "./navbar";
 
 export default async function TopNav() {
   const session = await auth();
   return (
-    <Menu as="div" className="relative inline-block text-left">
-      <div>
-        <MenuButton className="inline-flex w-full justify-center gap-x-1.5 rounded-full data-[open]:bg-main bg-component px-2 py-2 hover:bg-select">
-          <Image src="/account.svg" width={25} height={25} alt="Account" />
-        </MenuButton>
+    <div className="flex justify-between items-center">
+      <Link href="/" className="sm:hidden">
+        <h1 className="ml-1 text-lg">KnowItAll</h1>
+      </Link>
+      <div className="sm:hidden">
+        <NavBar />
       </div>
-      <MenuItems
-        transition
-        className="absolute right-0 z-10 mt-2 mr-2 p-1 w-24 origin-top-right rounded-md bg-component ring-1 shadow-lg ring-black/5 transition focus:outline-hidden data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[enter]:ease-out data-[leave]:duration-75 data-[leave]:ease-in"
-      >
-        <div className="py-1">
-          <MenuItem as="div">{session ? <SignOut /> : <SignIn />}</MenuItem>
-          <MenuItem as="div">
-            {session ? (
-              <Link href="/profile">
-                <h1 className="block px-4 py-2 text-sm hover:bg-select rounded-md">
-                  Profile
-                </h1>
-              </Link>
-            ) : null}
-          </MenuItem>
+      <Menu as="div" className="relative inline-block text-left">
+        <div>
+          <MenuButton className="inline-flex w-full justify-center gap-x-1.5 rounded-full data-[open]:bg-main bg-component px-2 py-2 hover:bg-select">
+            <Image src="/account.svg" width={25} height={25} alt="Account" />
+          </MenuButton>
         </div>
-      </MenuItems>
-    </Menu>
+        <MenuItems
+          transition
+          className="absolute right-0 z-10 mt-2 mr-2 p-1 w-24 origin-top-right rounded-md bg-component ring-1 shadow-lg ring-black/5 transition focus:outline-hidden data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[enter]:ease-out data-[leave]:duration-75 data-[leave]:ease-in"
+        >
+          <div className="py-1">
+            <MenuItem as="div">{session ? <SignOut /> : <SignIn />}</MenuItem>
+            <MenuItem as="div">
+              {session ? (
+                <Link href="/profile">
+                  <h1 className="block px-4 py-2 text-sm hover:bg-select rounded-md">
+                    Profile
+                  </h1>
+                </Link>
+              ) : null}
+            </MenuItem>
+          </div>
+        </MenuItems>
+      </Menu>
+    </div>
   );
 }
