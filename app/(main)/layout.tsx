@@ -1,5 +1,6 @@
 import SideNav from "@/app/ui/sidenav";
 import TopNav from "@/app/ui/topbar";
+import { Suspense } from "react";
 
 export default function MainLayout({
   children,
@@ -13,7 +14,9 @@ export default function MainLayout({
           <TopNav />
         </div>
         <SideNav />
-        <div className="grow">{children}</div>
+        <Suspense>
+          <div className="grow">{children}</div>
+        </Suspense>
       </div>
     </div>
   );
