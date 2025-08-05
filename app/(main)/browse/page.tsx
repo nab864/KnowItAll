@@ -24,8 +24,8 @@ export default async function Page(props: {
   const quizzes = await fetchFilteredQuizzes(currentPage, query, tags);
   return (
     <div className="flex flex-col items-center mt-10">
-      <Search placeholder="Seach category..." />
       <Suspense fallback={<Loading />}>
+        <Search placeholder="Seach category..." />
         <BrowseTable quizzes={quizzes} />
         <Pagination totalPages={totalPages} />
       </Suspense>
