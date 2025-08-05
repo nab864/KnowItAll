@@ -23,12 +23,12 @@ export default async function Page(props: {
   const totalPages = await fetchQuizPages(query);
   const quizzes = await fetchFilteredQuizzes(currentPage, query, tags);
   return (
-    <Suspense fallback={<Loading />}>
-      <div className="flex flex-col items-center mt-10">
-        <Search placeholder="Seach category..." />
+    <div className="flex flex-col items-center mt-10">
+      <Search placeholder="Seach category..." />
+      <Suspense fallback={<Loading />}>
         <BrowseTable quizzes={quizzes} />
         <Pagination totalPages={totalPages} />
-      </div>
-    </Suspense>
+      </Suspense>
+    </div>
   );
 }
