@@ -21,7 +21,7 @@ export const SingleQuestion: React.FC<SingleQuestionProps> = ({
   }, [question]);
 
   return (
-    <>
+    <div className="md:w-full">
       {answers[1] ? (
         <div
           className="bg-component w-[75%] rounded-lg text-center my-2"
@@ -60,6 +60,6 @@ export const SingleQuestion: React.FC<SingleQuestionProps> = ({
           })}
         </div>
       ) : null}
-    </>
+    </div>
   );
 };

@@ -15,7 +15,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "KnowItAll",
-  description: "Test your knowledge with KnowItAll — the ultimate trivia site packed with fun questions, quizzes, and brain-boosting challenges for all levels!",
+  description:
+    "Test your knowledge with KnowItAll — the ultimate trivia site packed with fun questions, quizzes, and brain-boosting challenges for all levels!",
 };
 
 export default function RootLayout({

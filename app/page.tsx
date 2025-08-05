@@ -6,7 +6,7 @@ export default async function Home() {
   const question = await fetchRandomQuestion();
 
   return (
-    <div className="flex flex-col items-center text-center">
+    <div className="flex flex-col items-center text-center sm-mt-10">
       <h1 className="text-9xl">Know It All</h1>
       <h3 className="text-2xl">Welcome!</h3>
       <p>
