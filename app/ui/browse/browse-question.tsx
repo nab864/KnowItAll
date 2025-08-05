@@ -21,10 +21,10 @@ export const SingleQuestion: React.FC<SingleQuestionProps> = ({
   }, [question]);
 
   return (
-    <div className="md:w-full">
+    <div className="w-full sm:w-[75%]">
       {answers[1] ? (
         <div
-          className="bg-component w-[75%] rounded-lg text-center my-2"
+          className="bg-component rounded-lg text-center my-2"
           key={question.id}
         >
           <h1 className="select-none">{question.question}</h1>

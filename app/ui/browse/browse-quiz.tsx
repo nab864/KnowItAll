@@ -26,7 +26,7 @@ export default function RandomQuiz({ question }: { question: Question }) {
   }, [selectedAnswer]);
 
   return (
-    <div className="flex flex-col items-center justify-center w-3/5 mt-5">
+    <div className="flex flex-col items-center justify-center w-full mt-5">
       <h1 className="text-2xl font-bold mb-4">Streak: {streakCount}</h1>
       <SingleQuestion
         question={questionState}
