@@ -14,7 +14,9 @@ export default async function Home() {
         the way!
       </p>
       <p className="mt-3">Think you know it all? Prove it.</p>
-      <NavBar />
+      <div className="hidden sm:block mt-5">
+        <NavBar />
+      </div>
       <RandomQuiz question={question} />
     </div>
   );

@@ -33,7 +33,7 @@ export const SingleQuestion: React.FC<SingleQuestionProps> = ({
               <div
                 key={index}
                 className={clsx({
-                  "hover:bg-select":
+                  "hover:bg-select transition-colors":
                     answer !== selectedAnswer && !selectedAnswer,
                   "bg-green-800":
                     selectedAnswer && answer === question.correctAnswer,

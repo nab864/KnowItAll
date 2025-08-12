@@ -21,7 +21,7 @@ export const QuestionProp: React.FC<QuestionProps> = ({
     <>
       {answers[1] ? (
         <div
-          className="bg-component w-[75%] rounded-lg text-center my-2"
+          className="bg-component w-full sm:w-[75%] rounded-lg text-center my-2"
           key={question.id}
         >
           <h1 className="select-none">{question.question}</h1>
