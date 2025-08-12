@@ -28,7 +28,7 @@ export default function QuestionForm({
   }
   
   return (
-    <div className="flex flex-col rounded-xl p-3 bg-component m-1" >
+    <div className="flex flex-col rounded-xl p-3 bg-component my-2" >
       <h1 className="text-lg">{`Question ${index + 1}`}</h1>
       <input
         type="text"
@@ -40,11 +40,11 @@ export default function QuestionForm({
         value={question.question}
       />
       <div className="flex">
-        <div className="flex flex-col">
+        <div className="flex flex-col mr-1">
           <input
             type="text"
             placeholder="Correct Answer"
-            className="pl-1 mt-2 mb-1 mr-1 bg-background"
+            className="pl-1 mt-2 mb-1 bg-background"
             onChange={(e) =>
               handleQuestionChange(index, "correctAnswer", e.target.value)
             }
@@ -53,30 +53,30 @@ export default function QuestionForm({
           <input
             type="text"
             placeholder="Incorrect Answer 1"
-            className="pl-1 mt-1 mb-1 mr-1 bg-background"
+            className="pl-1 mt-1 mb-1 bg-background"
             onChange={(e) => {handleInCorrectAnswersChange(0, e.target.value)}}
             value={question.incorrectAnswers[0]}
           />
           <input
             type="text"
             placeholder="Incorrect Answer 2"
-            className="pl-1 mt-1 mb-1 mr-1 bg-background"
+            className="pl-1 mt-1 mb-1 bg-background"
             onChange={(e) => {handleInCorrectAnswersChange(1, e.target.value)}}
             value={question.incorrectAnswers[1]}
           />
           <input
             type="text"
             placeholder="Incorrect Answer 3"
-            className="pl-1 mt-1 mb-1 mr-1 bg-background"
+            className="pl-1 mt-1 mb-1 bg-background"
             onChange={(e) => {handleInCorrectAnswersChange(2, e.target.value)}}
             value={question.incorrectAnswers[2]}
           />
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col ml-1 items-end shrink">
           <select
             name="difficulty"
             id="difficulty"
-            className="mt-2 mb-1 ml-1 p-0.5 pl-1 h-6 bg-background"
+            className="mt-2 mb-1 p-0.5 pl-1 h-6 bg-background w-full"
             defaultValue={question.difficulty}
             onChange={(e) =>
               handleQuestionChange(index, "difficulty", e.target.value)
@@ -89,21 +89,21 @@ export default function QuestionForm({
           <input
             type="text"
             placeholder="Tag 1"
-            className="pl-1 mt-1 mb-1 ml-1 bg-background"
+            className="pl-1 mt-1 mb-1 bg-background w-full sm:w-auto"
             onChange={(e) => {handleTagsChange(0, e.target.value)}}
             value={question.tags[0]}
           />
           <input
             type="text"
             placeholder="Tag 2"
-            className="pl-1 mt-1 mb-1 ml-1 bg-background"
+            className="pl-1 mt-1 mb-1 bg-background w-full sm:w-auto"
             onChange={(e) => {handleTagsChange(1, e.target.value)}}
             value={question.tags[1]}
           />
           <input
             type="text"
             placeholder="Tag 3"
-            className="pl-1 mt-1 mb-1 ml-1 bg-background"
+            className="pl-1 mt-1 mb-1 bg-background w-full sm:w-auto"
             onChange={(e) => {handleTagsChange(2, e.target.value)}}
             value={question.tags[2]}
           />

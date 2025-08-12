@@ -76,7 +76,7 @@ export default function QuizMakerForm({
                 difficulty: "easy",
                 question: "",
                 correctAnswer: "",
-                inCorrectAnswers: Array(3).fill(""),
+                incorrectAnswers: Array(3).fill(""),
                 tags: Array(3).fill(""),
                 type: "Multiple Choice",
               },
@@ -109,10 +109,10 @@ export default function QuizMakerForm({
   };
 
   return (
-    <div>
+    <div className="">
       <form>
-        <div className="flex justify-between">
-          <h1 className="text-2xl">Create your own Quiz</h1>
+        <div className="flex justify-between items-center sm:items-start flex-col sm:flex-row">
+          <h1 className="text-2xl mb-4 sm:mb-0">Create your own Quiz</h1>
           <select
             name="category"
             id="category"
