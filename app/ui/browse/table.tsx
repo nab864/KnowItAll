@@ -25,17 +25,17 @@ export default function BrowseTable({
 
   const handleDelete = async () => {
     await deleteQuiz(questionID as string);
-    router.refresh()
+    router.refresh();
   };
   return (
     <>
-      <table className="rounded-xl min-w-30 bg-component">
+      <table className="rounded-xl bg-component">
         <thead className="">
           <tr>
-            <th scope="col" className="px-4">
+            <th scope="col" className="w-1/3">
               Category
             </th>
-            <th scope="col" className="px-4">
+            <th scope="col" className="w-1/3 sm:w-auto sm:px-4">
               Number of Questions
             </th>
           </tr>
@@ -44,33 +44,31 @@ export default function BrowseTable({
           {quizzes?.map((quiz) => (
             <tr
               key={quiz.id}
-              className="w-full border-b-2  py-3 hover:bg-select last-of-type:border-none transition-colors"
+              className="border-b-2 sm:hover:bg-select last-of-type:border-none transition-colors"
             >
-              <td className="whitespace-nowrap py-3 pl-6 pr-3">
+              <td className="whitespace-nowrap pl-6">
                 {quiz.category}
               </td>
-              <td className="px-3 py-3 text-center">{quiz.questions.length}</td>
-              <td>
+              <td className="sm:py-3 text-center">{quiz.questions.length}</td>
+              <td className="flex flex-col sm:flex-row py-1">
                 <PlayButton id={quiz.id as string} />
-              </td>
+              
               {id ? (
                 <>
-                  <td>
-                    <UpdateButton id={quiz.id as string} />
-                  </td>
-                  <td>
-                    <button
-                      className="rounded-md border p-1.5 hover:bg-main transition-colors"
-                      onClick={() => {
-                        setOpen(true);
-                        setQuestionID(quiz.id);
-                      }}
-                    >
-                      Delete
-                    </button>
-                  </td>
+                  <UpdateButton id={quiz.id as string} />
+
+                  <button
+                    className="rounded-md border p-1.5 hover:bg-main transition-colors inline"
+                    onClick={() => {
+                      setOpen(true);
+                      setQuestionID(quiz.id);
+                    }}
+                  >
+                    Delete
+                  </button>
                 </>
               ) : null}
+              </td>
             </tr>
           ))}
         </tbody>

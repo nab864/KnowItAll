@@ -35,7 +35,7 @@ export default async function Profile(props: {
   );
   console.log(session?.user?.image)
   return (
-    <div className="my-2 flex flex-col items-center">
+    <div className="my-2 flex flex-col items-center sm:mt-10">
       <h1 className="text-4xl">Profile</h1>
       <UserInfo userData={userData} image={session?.user?.image}/>
       {quizzes.length === 0 ? (
