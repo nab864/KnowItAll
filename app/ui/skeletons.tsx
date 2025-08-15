@@ -1,33 +1,35 @@
 export function TableRowSkeleton() {
   return (
-    <tr className="border-b py-3 last-of-type:border-none">
-      <td className="whitespace-nowrap py-3 pl-6 pr-3">
-        <div className="w-[15ch] h-[2rem] bg-select motion-safe:animate-pulse rounded"></div>
+    <tr className="border-b-2 last-of-type:border-none bg-gray-400 motion-safe:animate-pulse last:bg-transparent">
+      <td className="py-1 w-2/5">
+        <div className="h-10"></div>
       </td>
-      <td className="whitespace-nowrap px-3 py-3">
-        <div className="w-[4ch] h-[2rem] bg-select motion-safe:animate-pulse rounded ml-20"></div>
+      <td>
+        <div className="h-10 w-2/5"></div>
       </td>
-      <td className="whitespace-nowrap px-3 py-3">
-        <div className="w-[4ch] h-[2rem] bg-select motion-safe:animate-pulse rounded"></div>
+      <td>
+        <div className="h-12 text-transparent">65856666666</div>
       </td>
     </tr>
   );
 }
 
-export function BrowseTableSkeleton() {
+export function BrowseTableSkeleton(){
+
   return (
-    <table className="rounded-xl min-w-30 bg-component">
+    <table className="rounded-xl bg-component sm:w-1/3">
       <thead className="">
         <tr>
-          <th scope="col" className="px-4">
+          <th scope="col" className="text-transparent">
             Category
           </th>
-          <th scope="col" className="px-4">
+          <th scope="col" className="sm:w-auto sm:px-4 text-transparent">
             Number of Questions
           </th>
         </tr>
       </thead>
       <tbody className="">
+        <TableRowSkeleton />
         <TableRowSkeleton />
         <TableRowSkeleton />
         <TableRowSkeleton />

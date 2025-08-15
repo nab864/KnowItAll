@@ -9,7 +9,7 @@ import NavBar from "./navbar";
 export default async function TopNav() {
   const session = await auth();
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center fixed bg-background w-full pb-1">
       <Link href="/" className="sm:hidden">
         <h1 className="ml-1 text-lg">KnowItAll</h1>
       </Link>

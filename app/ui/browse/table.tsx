@@ -29,13 +29,13 @@ export default function BrowseTable({
   };
   return (
     <>
-      <table className="rounded-xl bg-component">
+      <table className="rounded-xl bg-component sm:w-1/3">
         <thead className="">
           <tr>
-            <th scope="col" className="w-1/3">
+            <th scope="col" className="">
               Category
             </th>
-            <th scope="col" className="w-1/3 sm:w-auto sm:px-4">
+            <th scope="col" className="">
               Number of Questions
             </th>
           </tr>
@@ -46,10 +46,10 @@ export default function BrowseTable({
               key={quiz.id}
               className="border-b-2 sm:hover:bg-select last-of-type:border-none transition-colors"
             >
-              <td className="whitespace-nowrap pl-6">
+              <td className="pl-6 w-2/5">
                 {quiz.category}
               </td>
-              <td className="sm:py-3 text-center">{quiz.questions.length}</td>
+              <td className="text-center w-2/5">{quiz.questions.length}</td>
               <td className="flex flex-col sm:flex-row py-1">
                 <PlayButton id={quiz.id as string} />
               

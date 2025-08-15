@@ -19,7 +19,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
     replace(`${pathname}?${params.toString()}`);
   }, 100);
   return (
-    <div className="bg-component mb-3 p-2 relative rounded-lg">
+    <div className="bg-component mb-3 mt-11 sm:mt-0 p-2 relative rounded-lg">
       <label htmlFor="search" className="">
         <MagnifyingGlassIcon className="absolute w-6 top-3 left-3 select-none" />
         <input

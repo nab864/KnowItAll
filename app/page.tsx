@@ -7,14 +7,14 @@ export default async function Home() {
 
   return (
     <div className="flex flex-col items-center text-center mx-1">
-      <h1 className="text-6xl sm:text-9xl mt-1 sm:mt-11">Know It All</h1>
+      <h1 className="text-6xl sm:text-9xl mt-11 ">Know It All</h1>
       <h3 className="text-2xl mt-10">Welcome!</h3>
       <p>
         Dive into trivia, challenge your friends, and uncover weird facts along
         the way!
       </p>
       <p className="mt-3">Think you know it all? Prove it.</p>
-      <div className="hidden sm:block mt-5">
+      <div className="hidden sm:block mt-5 sm:mt-1">
         <NavBar />
       </div>
       <RandomQuiz question={question} />
