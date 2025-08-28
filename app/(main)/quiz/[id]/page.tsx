@@ -8,7 +8,7 @@ export default async function Page(props: { params: Promise<{ id: string}> }) {
   const id = params.id
   const quiz: QuizDef = await fetchQuiz(id)
   return (
-    <div className="my-2 flex justify-center">
+    <div className="mt-11 sm:mt-2 mb-2 flex justify-center">
       <Quiz id={id} quiz={quiz}/>
     </div>
   )
